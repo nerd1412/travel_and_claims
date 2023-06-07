@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+          <!-- CSS only -->
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+          <!-- JavaScript Bundle with Popper -->
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>        
+    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
+    <!-- JavaScript Bundle with Popper -->
+  {% load static %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+    
+      *{
+        font-family: 'Poppins', sans-serif;
+      }
+      .ul{
+        margin-left: 90%;
+      }
+      
+      .navbar-center{
+        margin-left: 61%;
+      }
+      @media (max-width: 991px) {
+      .navbar-center {
+        margin-left: -0.2%;
+      }
+    }
+      @media (max-width: 991px) {
+      .ul {
+        margin-left: -0.2%;
+      }
+    }
+    </style>
+</head>
+<body>
+
+  <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #E9ECEF;border-bottom:solid white;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">
+        <img src="https://i.ibb.co/TbpT6p1/AAKIT-Logo.png" alt="" width="110" height="45">
+        <!-- <span><i class="fa-solid fa-user-tie"></i></span> -->
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul">
+            
+            <li class="nav-item">
+            <a class="nav-link" href="#" style="color:#2F3233">{{ user.first_name }}</a>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="profile-mini" src=https://contacts.zoho.in/file?t=user&ID=60018445719&fs=thumb width="30" height="30" style="border-radius: 15px;"></a>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Manage my Account</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'mylogin' %}">Logout</a></li>
+              </ul>
+            </li>
+            
+          </ul>
+      </div>
+      
+    </div>
+  </nav>
+  
+    {% block content %}
+
+    {% endblock %}
+  <footer class="text-center fixed-bottom" style="height:4%;padding:8px;background-color:#E9ECEF;color:black;border-top:solid white;">
+    <div class="text-center">
+      <small>Copyright  2022 - All rights reserved</small>
+      <a href=http://www.aakit.com target="_blank">AAKIT</a>
+  </footer>
+</body>
+</html>

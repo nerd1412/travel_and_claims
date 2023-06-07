@@ -1,0 +1,2122 @@
+<head>
+  {% load static %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+      <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+            <!-- CSS only -->
+      <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+            <!-- JavaScript Bundle with Popper -->
+      <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+              integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+      </script>        
+      <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
+  
+  
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+    
+      *{
+        font-family: 'Poppins', sans-serif;
+      }
+      .homelink:hover {background-color:rebeccapurple;}
+      
+      .ul{
+          margin-left: 90%;
+        }
+        
+        .navbar-center{
+          margin-left: 61%;
+        }
+        @media (max-width: 991px) {
+        .navbar-center {
+          margin-left: -0.2%;
+        }
+      }
+        @media (max-width: 991px) {
+        .ul {
+          margin-left: -0.2%;
+        }
+      }
+
+      .bi-trash {
+        /* font-size: 1.2rem; */
+        color: #dc3545;
+      }
+
+      .remove-link {
+          margin-left: 326%;
+        }
+
+        /* .from-input{
+          width: 100%;
+        } */
+
+        /* .to-input{
+          width: 100%;
+        } */
+
+        /* , .ci-input, .to-input, .to-input  */
+
+    </style>
+  
+        <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+        <!-- CSS only -->
+        <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+          integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+        </script>
+  {% load static %}
+  </head>
+<script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+<script>
+  $(document).ready(function () {      
+    $("#mymodal").modal('show')
+  });
+</script>
+<script>
+  function showDiv(divId, element)
+  {
+      document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+      document.getElementById('visa').style.display = element.value == 1 ? 'block' : 'none';
+
+  }
+
+  $(function() {
+    $('.dtype').change(function() {
+      // Roundtrip
+      if($(this).val() == 'Round Trip')
+      {
+       {$('#div2').show();}
+      }else{
+       {$('#div2').hide();}
+      }
+      //Multicity
+      if($(this).val() == 'Multi-city')
+      {
+      //  {$('#div3').show();}
+       {$('#add-flight').show();}
+      }else{
+      //  {$('#div3').hide();}
+       {$('#add-flight').hide();}
+
+      }
+    });
+  });
+
+
+
+  function addTime() {    
+      var timeDiv='<hr style="margin-top:25px;"><div class="row"><div class="col-3 depart" style="width: 25.5%;"><label class="form-label" style="font-weight: 400;color: #b94a48;">DEPART FROM*</label><div class="" style="">{{form.TDDPART2}}</div></div><div class="col-3 arrive" style="width: 25.5%;"><label class="form-label" style="font-weight: 400;color: #b94a48;">ARRIVE AT*</label><div class="" style="">{{form.TDARVAT2}}</div></div><div class="col-3 departdate" style="width: 25.5%;"><label class="form-label" style="font-weight: 400;color: #b94a48;">DEPARTURE DATE*</label><div class="" style="">{{form.TDDPARTDTE3}}</div></div></div>';
+      $("#div3").append(timeDiv);
+  } 
+
+
+  function addHotel() {    
+      var timeDiv='<hr style="margin-top:25px;margin-top:25px"><div class="row" id="hotel"><div class="col-3 departdate"><label class="form-label">CHECK-IN DATE*</label><div>{{hotel_form.THDCHKINDTE}}</div></div><div class="col-3 departdate"><label class="form-label">CHECK-OUT DATE*</label><div>{{hotel_form.THDCHKOTDTE}}</div></div></div><div id="hotel_form" style="margin-top:17px;" class="row"><div class="col-3 departdate"><label class="form-label">PREFERRED HOTEL</label><div>{{hotel_form.THDPREFHOTL}}</div></div> <div class="col-3 departdate"><label class="form-label">CITY</label><div>{{hotel_form.THDCITY}} <i class="fas fa-trash-alt" style="color:red;margin-left:320%;margin-top:-28px;"></i></div>';
+      $("#hotel_form").append(timeDiv);
+  } 
+
+  function addCar() {    
+      var timeDiv='<hr style="margin-top:25px;margin-top:25px"><div class="row"  id="car" style="margin-top:15px;margin-bottom:15px;"><div class="col-3 departdate" style=""><label class="form-label" style="font-weight: 400;color: #b94a48;">FROM LOCATION*</label><div class="" style="">{{car_form.TCBDFLOC}}</div></div><div class="col-3 departdate" style=""><label class="form-label" style="font-weight: 400;color: #b94a48;">TO LOCATION*</label><div class="" style="">{{car_form.TCBDTLOC}}</div></div></div><div id="car_form" class="row" style="margin-bottom: 17px;"><div class="col-3 departdate" style=""><label class="form-label" style="font-weight: 400;color: #b94a48;">PICKUP DATE*</label><div class="" style="">{{car_form.TCBDPIKU}}</div></div><div class="col-3 departdate" style=""><label class="form-label" style="font-weight: 400;color: #b94a48;">DROP DATE*</label><div class="" style="">{{car_form.TCBDDROP}}</div></div>  <div class="col-3" style=""><label class="form-label" style="font-weight: 400;">REMARKS</label><div class="" style="">{{car_form.TCBDREM}}<i class="fas fa-trash-alt" style="color:red;margin-left:213%;margin-top:-28px;"></i></div></div></div>';
+      $("#car_form").append(timeDiv);
+  } 
+
+  function addVisa() {    
+      var timeDiv='<hr style="margin-top:25px;margin-top:25px"><div class="row" id="visa_form" style="margin-top:15px;"><div class="col-3" style=""><label class="form-label" style="font-weight: 400;color: #b94a48;">TRAVEL DATE*</label><div class="" style="">{{visa_form.TVDTRAVDTE}}</div></div><div class="col-3" style=""><label class="form-label" style="font-weight: 400;color: #b94a48;">VISITING COUNTRY*</label><div class="" style="">{{visa_form.TVDVISTGCOUN}}</div></div><div class="col-3" style=""><label class="form-label" style="font-weight: 400;">VISA FEES</label><div class="" style="">{{visa_form.TVDVSAFES}}</div></div><div class="col-3" style=""><label class="form-label" style="font-weight: 400;">REMARKS</label><div class="" style="">{{visa_form.TVDREMK}} <i class="fas fa-trash-alt" style="color:red;margin-left:105%;margin-top:-28px;"></i></div></div></div>';
+      $("#visa_form").append(timeDiv);
+  } 
+
+
+
+ 
+// multicity_flights
+
+document.addEventListener('DOMContentLoaded', () => {
+  const formsetPrefix = '{{ multicity_formset.prefix }}';
+  const formsetTotalFormsString = '{{ multicity_formset.total_form_count }}';
+  // console.log('formsetTotalFormsString:', formsetTotalFormsString);
+  const formsetTotalForms = parseInt(formsetTotalFormsString);
+  // console.log('formsetTotalForms:', formsetTotalForms);
+  // const formsetManagementForm = document.querySelector(`input[name="${formsetPrefix}-TOTAL_FORMS"]`);
+  const formsetManagementForm = document.querySelector('input[name="multicity-TOTAL_FORMS"]');
+
+
+  const flightForm = document.querySelector('#flight_form');
+  const addFieldLink = document.querySelector('#add-flight');
+  const fieldContainer = document.querySelector('#field-container');
+
+  let fieldCount = formsetTotalForms;
+
+  addFieldLink.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    // Create a new div element to hold the fields
+    const fieldSet = document.createElement('div');
+    fieldSet.classList.add('row', 'mb-3');
+    const hrElement = document.createElement('hr');
+    hrElement.style.marginTop = '15px';
+    fieldSet.appendChild(hrElement);
+
+    // Create the fields and append them to the fieldSet div
+    const fromInput = createInput('text',`${fieldCount}-TFLDFRMPLC`, 'DEPART FROM*');
+    const toInput = createInput('text', `${fieldCount}-TFLDTOPLC`, 'ARRIVE AT*');
+    const dateInput = createDateInput(`${fieldCount}-TFLDDTEOFTRV`, 'DEPARTURE DATE*');
+    const removeLink = createRemoveLink(fieldSet);
+
+    fieldSet.appendChild(fromInput);
+    fieldSet.appendChild(toInput);
+    fieldSet.appendChild(dateInput);
+    fieldSet.appendChild(removeLink);
+
+    // Append the fieldSet div to the container div
+    fieldContainer.appendChild(fieldSet);
+
+    // Update the management form with the new total form count
+    formsetManagementForm.setAttribute('value', `${fieldCount + 1}`);
+
+    fieldCount++;
+    updateFieldAttributes();
+  });
+
+  function createInput(type, name, label) {
+    const inputDiv = document.createElement('div');
+    inputDiv.classList.add('col');
+
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('form-label');
+    labelElement.textContent = label;
+
+    const inputElement = document.createElement('input');
+    inputElement.classList.add('form-control');
+    inputElement.setAttribute('type', type);
+    inputElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+    inputDiv.appendChild(labelElement);
+    inputDiv.appendChild(inputElement);
+
+    // if (name === 'TFLDFRMPLC' || name === 'TFLDTOPLC' || name === 'TFLDDTEOFTRV') {
+    //     inputDiv.appendChild(labelElement);
+    //     inputDiv.appendChild(inputElement);
+    // }
+
+    return inputDiv;
+  }
+
+  function createDateInput(name, label) {
+    const inputDiv = document.createElement('div');
+    inputDiv.classList.add('col');
+
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('form-label');
+    labelElement.textContent = label;
+
+    const inputElement = document.createElement('input');
+    inputElement.classList.add('form-control');
+    inputElement.setAttribute('type', 'date');
+    inputElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+    // Disable past dates
+    const today = new Date().toISOString().split('T')[0];
+    inputElement.setAttribute('min', today);
+
+    inputDiv.appendChild(labelElement);
+    inputDiv.appendChild(inputElement);
+
+    return inputDiv;
+  }
+
+  function createRemoveLink(fieldSet) {
+    const linkDiv = document.createElement('div');
+    linkDiv.classList.add('col');
+
+    const removeLink = document.createElement('a');
+    removeLink.setAttribute('href', '#');
+
+    const iconElement = document.createElement('i');
+    iconElement.classList.add('fas', 'fa-trash-alt');
+    iconElement.style = 'float:right';
+    iconElement.style.color = 'red';
+    iconElement.style.marginTop = '40px';
+
+    removeLink.appendChild(iconElement);
+
+    removeLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      fieldSet.remove();
+    });
+
+    linkDiv.appendChild(removeLink);
+
+    return linkDiv;
+  }
+
+});
+
+// multiple_hotel
+
+document.addEventListener('DOMContentLoaded', () => {
+  const formsetPrefix = '{{ multihotel_formset.prefix }}';
+  // const formsetPrefix = 'multihotel-1'
+  console.log('formsetPrefix:', formsetPrefix);
+
+  const formsetTotalFormsString = '{{ multihotel_formset.total_form_count }}';
+  console.log('formsetTotalFormsString:', formsetTotalFormsString);
+  const formsetTotalForms = parseInt(formsetTotalFormsString);
+  console.log('formsetTotalForms:', formsetTotalForms);
+  // const formsetManagementForm = document.querySelector(`input[name="${formsetPrefix}-TOTAL_FORMS"]`);
+  const formsetManagementForm = document.querySelector('input[name="multihotel-TOTAL_FORMS"]');
+
+
+  const flightForm = document.querySelector('#hotel_form');
+  const addFieldLink = document.querySelector('#add-hotel');
+  const fieldContainer = document.querySelector('#field-container-hotel');
+
+  let fieldCount = formsetTotalForms;
+
+  addFieldLink.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  // Create a new div element to hold the fields
+  const fieldSet = document.createElement('div');
+  fieldSet.classList.add('row', 'mb-3');
+  const hrElement = document.createElement('hr');
+  hrElement.style.marginTop = '15px';
+  fieldSet.appendChild(hrElement);
+
+  // Create the first row for the select field and trash icon
+  const selectRow = document.createElement('div');
+  selectRow.classList.add('row');
+  const selectCol = document.createElement('div');
+  selectCol.classList.add('col-3', 'd-flex');
+  const selectInput = createSelect(`${fieldCount}-THDHTYPE`, 'Room Type');
+  // selectInput.classList.add('w-100'); // Set width to 100%
+  selectInput.style.width = '290px';
+  selectInput.style.marginBottom = '15px';
+  const removeLink = createRemoveLink(fieldSet);
+  removeLink.classList.add('remove-link'); // Add CSS class for alignment
+
+  selectCol.appendChild(selectInput);
+  selectCol.appendChild(removeLink);
+  selectRow.appendChild(selectCol);
+  fieldSet.appendChild(selectRow);
+
+  // Create the second row for the remaining fields
+  const fieldsRow = document.createElement('div');
+  fieldsRow.classList.add('row');
+  const dateCol = document.createElement('div');
+  dateCol.classList.add('col-3');
+  const dateInput = createDateInput(`${fieldCount}-THDCHKINDTE`, 'CHECK-IN DATE*');
+  dateInput.style.width = '290px';
+
+  dateCol.appendChild(dateInput);
+  fieldsRow.appendChild(dateCol);
+
+  const dateCol2 = document.createElement('div');
+  dateCol2.classList.add('col-3');
+  const dateInput2 = createDateInput(`${fieldCount}-THDCHKOTDTE`, 'CHECK-OUT DATE*');
+  dateInput2.style.width = '290px';
+  dateInput2.style.marginLeft = '10px';
+  // dateInput2.classList.add('co-input'); 
+
+  dateCol2.appendChild(dateInput2);
+  fieldsRow.appendChild(dateCol2);
+
+  const fromCol = document.createElement('div');
+  fromCol.classList.add('col-3');
+  const fromInput = createInput('text',`${fieldCount}-THDPREFHOTL`, 'PREFERRED HOTEL');
+  fromInput.style.width = '290px';
+  fromInput.style.marginLeft = '15px';
+  fromInput.classList.add('from-input');  
+  fromCol.appendChild(fromInput);
+  fieldsRow.appendChild(fromCol);
+
+  const toCol = document.createElement('div');
+  toCol.classList.add('col-3');
+  const toInput = createInput('text', `${fieldCount}-THDCITY`, 'CITY*');
+  toInput.style.width = '290px';
+  toInput.style.marginLeft = '18px';
+  // toInput.classList.add('to-input');
+  toCol.appendChild(toInput);
+  fieldsRow.appendChild(toCol);
+
+  fieldSet.appendChild(fieldsRow);
+
+  // Append the fieldSet div to the container div
+  fieldContainer.appendChild(fieldSet);
+
+  // Update the management form with the new total form count
+  formsetManagementForm.setAttribute('value', `${fieldCount + 1}`);
+
+  fieldCount++;
+  updateFieldAttributes();
+});
+
+
+
+
+
+  function createSelect(name, label) {
+  const selectDiv = document.createElement('div');
+  selectDiv.classList.add('col-3');
+
+  const labelElement = document.createElement('label');
+  labelElement.classList.add('form-label');
+  labelElement.textContent = label;
+
+  const selectElement = document.createElement('select');
+  selectElement.classList.add('form-select');
+
+  console.log('formsetPrefix:', formsetPrefix);
+  console.log('name:', name);
+
+  selectElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+  // Add options to the select element
+  const option1 = document.createElement('option');
+  option1.textContent = 'Single';
+  option1.setAttribute('value', 'Single');
+  selectElement.appendChild(option1);
+
+  const option2 = document.createElement('option');
+  option2.textContent = 'Double';
+  option2.setAttribute('value', 'Double');
+  selectElement.appendChild(option2);
+
+  const option3 = document.createElement('option');
+  option3.textContent = 'Villa';
+  option3.setAttribute('value', 'Villa');
+  selectElement.appendChild(option3);
+
+  selectDiv.appendChild(labelElement);
+  selectDiv.appendChild(selectElement);
+
+  return selectDiv;
+}
+
+  
+
+
+  function createInput(type, name, label) {
+    const inputDiv = document.createElement('div');
+    inputDiv.classList.add('col');
+
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('form-label');
+    labelElement.textContent = label;
+
+    const inputElement = document.createElement('input');
+    inputElement.classList.add('form-control');
+    inputElement.setAttribute('type', type);
+    inputElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+    inputDiv.appendChild(labelElement);
+    inputDiv.appendChild(inputElement);
+
+
+    return inputDiv;
+  }
+
+  function createDateInput(name, label) {
+    const inputDiv = document.createElement('div');
+    inputDiv.classList.add('col');
+
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('form-label');
+    labelElement.textContent = label;
+
+    const inputElement = document.createElement('input');
+    inputElement.classList.add('form-control');
+    inputElement.setAttribute('type', 'date');
+    inputElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+    const today = new Date().toISOString().split('T')[0];
+    inputElement.setAttribute('min', today);
+
+    inputDiv.appendChild(labelElement);
+    inputDiv.appendChild(inputElement);
+
+    return inputDiv;
+  }
+
+  function createRemoveLink(fieldSet) {
+    const linkDiv = document.createElement('div');
+    linkDiv.classList.add('col');
+
+    const removeLink = document.createElement('a');
+    removeLink.setAttribute('href', '#');
+
+    const iconElement = document.createElement('i');
+    iconElement.classList.add('fas', 'fa-trash-alt');
+    iconElement.style = 'float:right';
+    iconElement.style.color = 'red';
+    iconElement.style.marginTop = '40px';
+
+    removeLink.appendChild(iconElement);
+
+    removeLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      fieldSet.remove();
+    });
+
+    linkDiv.appendChild(removeLink);
+
+    return linkDiv;
+  }
+
+});
+
+
+// multiple_car
+
+document.addEventListener('DOMContentLoaded', () => {
+  const formsetPrefix = '{{ multicar_formset.prefix }}';
+  console.log('formsetPrefix:', formsetPrefix); 
+  const formsetTotalFormsString = '{{ multicar_formset.total_form_count }}';
+  console.log('formsetTotalFormsString:', formsetTotalFormsString);
+  const formsetTotalForms = parseInt(formsetTotalFormsString);
+  console.log('formsetTotalForms:', formsetTotalForms);
+  const formsetManagementForm = document.querySelector('input[name="multicar-TOTAL_FORMS"]');
+
+
+  const flightForm = document.querySelector('#car');
+  const addFieldLink = document.querySelector('#add-car');
+  const fieldContainer = document.querySelector('#field-container-car');
+
+  let fieldCount = formsetTotalForms;
+
+  addFieldLink.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  // Create a new div element to hold the fields
+  const fieldSet = document.createElement('div');
+  fieldSet.classList.add('row', 'mb-3');
+  const hrElement = document.createElement('hr');
+  hrElement.style.marginTop = '15px';
+  fieldSet.appendChild(hrElement);
+
+  // Create the first row for the select field and trash icon
+  const selectRow = document.createElement('div');
+  selectRow.classList.add('row');
+  const selectCol = document.createElement('div');
+  selectCol.classList.add('col-3', 'd-flex');
+  const selectInput = createSelect(`${fieldCount}-TCBDCTYP`, 'Car Type');
+  // selectInput.classList.add('w-100'); // Set width to 100%
+  selectInput.style.width = '290px';
+  selectInput.style.marginBottom = '15px';
+  const removeLink = createRemoveLink(fieldSet);
+  removeLink.classList.add('remove-link'); // Add CSS class for alignment
+
+  selectCol.appendChild(selectInput);
+  selectCol.appendChild(removeLink);
+  selectRow.appendChild(selectCol);
+  fieldSet.appendChild(selectRow);
+
+  // Create the second row for the remaining fields
+  const fieldsRow = document.createElement('div');
+  fieldsRow.classList.add('row');
+  const dateCol = document.createElement('div');
+  dateCol.classList.add('col-3');
+  const dateInput = createInput('text',`${fieldCount}-TCBDFRLOC`, 'FROM LOCATION*');
+  dateInput.style.width = '290px';
+
+  dateCol.appendChild(dateInput);
+  fieldsRow.appendChild(dateCol);
+
+  const dateCol2 = document.createElement('div');
+  dateCol2.classList.add('col-3');
+  const dateInput2 = createInput('text',`${fieldCount}-TCBDTOLOC`, 'TO LOCATION*');
+  dateInput2.style.width = '290px';
+  dateInput2.style.marginLeft = '10px';
+  // dateInput2.classList.add('co-input'); 
+
+  dateCol2.appendChild(dateInput2);
+  fieldsRow.appendChild(dateCol2);
+
+  const fromCol = document.createElement('div');
+  fromCol.classList.add('col-3');
+  const fromInput = createDateInput(`${fieldCount}-TCBDPIKU`, 'PICKUP DATE*');
+  fromInput.style.width = '290px';
+  fromInput.style.marginLeft = '15px';
+  fromCol.appendChild(fromInput);
+  fieldsRow.appendChild(fromCol);
+
+  const toCol = document.createElement('div');
+  toCol.classList.add('col-3');
+  const toInput = createDateInput(`${fieldCount}-TCBDDROP`, 'DROP DATE*');
+  toInput.style.width = '290px';
+  toInput.style.marginLeft = '18px';
+  // toInput.classList.add('to-input');
+  toCol.appendChild(toInput);
+  fieldsRow.appendChild(toCol);
+
+  fieldSet.appendChild(fieldsRow);
+
+  // Append the fieldSet div to the container div
+  fieldContainer.appendChild(fieldSet);
+
+  // Update the management form with the new total form count
+  formsetManagementForm.setAttribute('value', `${fieldCount + 1}`);
+
+  fieldCount++;
+  updateFieldAttributes();
+});
+
+
+
+
+
+  function createSelect(name, label) {
+  const selectDiv = document.createElement('div');
+  selectDiv.classList.add('col-3');
+
+  const labelElement = document.createElement('label');
+  labelElement.classList.add('form-label');
+  labelElement.textContent = label;
+
+  const selectElement = document.createElement('select');
+  selectElement.classList.add('form-select');
+  selectElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+  // Add options to the select element
+  const option1 = document.createElement('option');
+  option1.textContent = 'Micro';
+  option1.setAttribute('value', 'Micro');
+  selectElement.appendChild(option1);
+
+  const option2 = document.createElement('option');
+  option2.textContent = 'Sedan';
+  option2.setAttribute('value', 'Sedan');
+  selectElement.appendChild(option2);
+
+  const option3 = document.createElement('option');
+  option3.textContent = 'SUV';
+  option3.setAttribute('value', 'SUV');
+  selectElement.appendChild(option3);
+
+  selectDiv.appendChild(labelElement);
+  selectDiv.appendChild(selectElement);
+
+  return selectDiv;
+}
+
+  
+
+
+  function createInput(type, name, label) {
+    const inputDiv = document.createElement('div');
+    inputDiv.classList.add('col');
+
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('form-label');
+    labelElement.textContent = label;
+
+    const inputElement = document.createElement('input');
+    inputElement.classList.add('form-control');
+    inputElement.setAttribute('type', type);
+    inputElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+    inputDiv.appendChild(labelElement);
+    inputDiv.appendChild(inputElement);
+
+
+    return inputDiv;
+  }
+
+  function createDateInput(name, label) {
+    const inputDiv = document.createElement('div');
+    inputDiv.classList.add('col');
+
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('form-label');
+    labelElement.textContent = label;
+
+    const inputElement = document.createElement('input');
+    inputElement.classList.add('form-control');
+    inputElement.setAttribute('type', 'date');
+    inputElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+    const today = new Date().toISOString().split('T')[0];
+    inputElement.setAttribute('min', today);
+
+    inputDiv.appendChild(labelElement);
+    inputDiv.appendChild(inputElement);
+
+    return inputDiv;
+  }
+
+  function createRemoveLink(fieldSet) {
+    const linkDiv = document.createElement('div');
+    linkDiv.classList.add('col');
+
+    const removeLink = document.createElement('a');
+    removeLink.setAttribute('href', '#');
+
+    const iconElement = document.createElement('i');
+    iconElement.classList.add('fas', 'fa-trash-alt');
+    iconElement.style = 'float:right';
+    iconElement.style.color = 'red';
+    iconElement.style.marginTop = '40px';
+
+    removeLink.appendChild(iconElement);
+
+    removeLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      fieldSet.remove();
+    });
+
+    linkDiv.appendChild(removeLink);
+
+    return linkDiv;
+  }
+
+});
+
+// multiple_visa
+
+document.addEventListener('DOMContentLoaded', () => {
+  const formsetPrefix = '{{ multivisa_formset.prefix }}';
+  const formsetTotalFormsString = '{{ multivisa_formset.total_form_count }}';
+  console.log('formsetTotalFormsString:', formsetTotalFormsString);
+  const formsetTotalForms = parseInt(formsetTotalFormsString);
+  console.log('formsetTotalForms:', formsetTotalForms);
+  // const formsetManagementForm = document.querySelector(`input[name="${formsetPrefix}-TOTAL_FORMS"]`);
+  const formsetManagementForm = document.querySelector('input[name="multivisa-TOTAL_FORMS"]');
+
+
+  const flightForm = document.querySelector('#flight_form');
+  const addFieldLink = document.querySelector('#add-visa');
+  const fieldContainer = document.querySelector('#field-container-visa');
+
+  let fieldCount = formsetTotalForms;
+
+  addFieldLink.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  // Create a new div element to hold the fields
+  const fieldSet = document.createElement('div');
+  fieldSet.classList.add('row', 'mb-3');
+  const hrElement = document.createElement('hr');
+  hrElement.style.marginTop = '15px';
+  fieldSet.appendChild(hrElement);
+
+  // Create the first row for the select field and trash icon
+  const selectRow = document.createElement('div');
+  selectRow.classList.add('row');
+  const selectCol = document.createElement('div');
+  selectCol.classList.add('col-3', 'd-flex');
+  const selectInput = createSelect(`${fieldCount}-TVDVISTYPE`, 'Visa Type');
+  // selectInput.classList.add('w-100'); // Set width to 100%
+  selectInput.style.width = '290px';
+  selectInput.style.marginBottom = '15px';
+  const removeLink = createRemoveLink(fieldSet);
+  removeLink.classList.add('remove-link'); // Add CSS class for alignment
+
+  selectCol.appendChild(selectInput);
+  selectCol.appendChild(removeLink);
+  selectRow.appendChild(selectCol);
+  fieldSet.appendChild(selectRow);
+
+  // Create the second row for the remaining fields
+  const fieldsRow = document.createElement('div');
+  fieldsRow.classList.add('row');
+  const dateCol = document.createElement('div');
+  dateCol.classList.add('col-3');
+  const dateInput = createDateInput(`${fieldCount}-TVDTRAVDTE`, 'TRAVEL DATE*');
+  dateInput.style.width = '290px';
+
+  dateCol.appendChild(dateInput);
+  fieldsRow.appendChild(dateCol);
+
+  const dateCol2 = document.createElement('div');
+  dateCol2.classList.add('col-3');
+  const dateInput2 = createInput('text',`${fieldCount}-TVDVISTGCOUN`, 'VISITING COUNTRY*');
+  dateInput2.style.width = '290px';
+  dateInput2.style.marginLeft = '10px';
+  // dateInput2.classList.add('co-input'); 
+
+  dateCol2.appendChild(dateInput2);
+  fieldsRow.appendChild(dateCol2);
+
+  const fromCol = document.createElement('div');
+  fromCol.classList.add('col-3');
+  const fromInput = createInput('text',`${fieldCount}-TVDVSAFES`, 'VISA FEES');
+  fromInput.style.width = '290px';
+  fromInput.style.marginLeft = '15px';
+  fromCol.appendChild(fromInput);
+  fieldsRow.appendChild(fromCol);
+
+  const toCol = document.createElement('div');
+  toCol.classList.add('col-3');
+  const toInput = createInput('text',`${fieldCount}-TVDREMK`, 'REMARKS');
+  toInput.style.width = '290px';
+  toInput.style.marginLeft = '18px';
+  // toInput.classList.add('to-input');
+  toCol.appendChild(toInput);
+  fieldsRow.appendChild(toCol);
+
+  fieldSet.appendChild(fieldsRow);
+
+  // Append the fieldSet div to the container div
+  fieldContainer.appendChild(fieldSet);
+
+  // Update the management form with the new total form count
+  formsetManagementForm.setAttribute('value', `${fieldCount + 1}`);
+
+  fieldCount++;
+  updateFieldAttributes();
+  });
+
+
+  function createSelect(name, label) {
+  const selectDiv = document.createElement('div');
+  selectDiv.classList.add('col-3');
+
+  const labelElement = document.createElement('label');
+  labelElement.classList.add('form-label');
+  labelElement.textContent = label;
+
+  const selectElement = document.createElement('select');
+  selectElement.classList.add('form-select');
+  selectElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+  // Add options to the select element
+  const option1 = document.createElement('option');
+  option1.textContent = 'Business Type';
+  option1.setAttribute('value', 'Business Type');
+  selectElement.appendChild(option1);
+
+  const option2 = document.createElement('option');
+  option2.textContent = 'Project Visa';
+  option2.setAttribute('value', 'Project Visa');
+  selectElement.appendChild(option2);
+
+  const option3 = document.createElement('option');
+  option3.textContent = 'Conference Visa';
+  option3.setAttribute('value', 'Conference Visa');
+  selectElement.appendChild(option3);
+
+  const option4 = document.createElement('option');
+  option4.textContent = 'Research Visa';
+  option4.setAttribute('value', 'Research Visa');
+  selectElement.appendChild(option4);
+
+  selectDiv.appendChild(labelElement);
+  selectDiv.appendChild(selectElement);
+
+  return selectDiv;
+}
+
+  
+
+
+  function createInput(type, name, label) {
+    const inputDiv = document.createElement('div');
+    inputDiv.classList.add('col');
+
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('form-label');
+    labelElement.textContent = label;
+
+    const inputElement = document.createElement('input');
+    inputElement.classList.add('form-control');
+    inputElement.setAttribute('type', type);
+    inputElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+    inputDiv.appendChild(labelElement);
+    inputDiv.appendChild(inputElement);
+
+
+    return inputDiv;
+  }
+
+  function createDateInput(name, label) {
+    const inputDiv = document.createElement('div');
+    inputDiv.classList.add('col');
+
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('form-label');
+    labelElement.textContent = label;
+
+    const inputElement = document.createElement('input');
+    inputElement.classList.add('form-control');
+    inputElement.setAttribute('type', 'date');
+    inputElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+    const today = new Date().toISOString().split('T')[0];
+    inputElement.setAttribute('min', today);
+
+    inputDiv.appendChild(labelElement);
+    inputDiv.appendChild(inputElement);
+
+    return inputDiv;
+  }
+
+  function createRemoveLink(fieldSet) {
+    const linkDiv = document.createElement('div');
+    linkDiv.classList.add('col');
+
+    const removeLink = document.createElement('a');
+    removeLink.setAttribute('href', '#');
+
+    const iconElement = document.createElement('i');
+    iconElement.classList.add('fas', 'fa-trash-alt');
+    iconElement.style = 'float:right';
+    iconElement.style.color = 'red';
+    iconElement.style.marginTop = '40px';
+
+    removeLink.appendChild(iconElement);
+
+    removeLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      fieldSet.remove();
+    });
+
+    linkDiv.appendChild(removeLink);
+
+    return linkDiv;
+  }
+
+});
+
+// multiple_forex
+
+document.addEventListener('DOMContentLoaded', () => {
+  const formsetPrefix = '{{ multiforex_formset.prefix }}';
+  const formsetTotalFormsString = '{{ multiforex_formset.total_form_count }}';
+  console.log('formsetTotalFormsString:', formsetTotalFormsString);
+  const formsetTotalForms = parseInt(formsetTotalFormsString);
+  console.log('formsetTotalForms:', formsetTotalForms);
+  // const formsetManagementForm = document.querySelector(`input[name="${formsetPrefix}-TOTAL_FORMS"]`);
+  const formsetManagementForm = document.querySelector('input[name="multiforex-TOTAL_FORMS"]');
+
+
+  // const flightForm = document.querySelector('#flight_form');
+  const addFieldLink = document.querySelector('#add-forex');
+  const fieldContainer = document.querySelector('#field-container-forex');
+
+  let fieldCount = formsetTotalForms;
+
+  addFieldLink.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  // Create a new div element to hold the fields
+  const fieldSet = document.createElement('div');
+  fieldSet.classList.add('row', 'mb-3');
+  const hrElement = document.createElement('hr');
+  hrElement.style.marginTop = '15px';
+  fieldSet.appendChild(hrElement);
+
+  // Create the first row for the select field and trash icon
+  const selectRow = document.createElement('div');
+  selectRow.classList.add('row');
+  const selectCol = document.createElement('div');
+  selectCol.classList.add('col-3', 'd-flex');
+  const selectcashInput = createSelect(`${fieldCount}-TFDCSHTYPE`, 'Type');
+  // selectInput.classList.add('w-100'); // Set width to 100%
+  selectcashInput.style.width = '290px';
+  selectcashInput.style.marginBottom = '15px';
+  const removeLink = createRemoveLink(fieldSet);
+  removeLink.classList.add('remove-link'); // Add CSS class for alignment
+
+  selectCol.appendChild(selectcashInput);
+  selectCol.appendChild(removeLink);
+  selectRow.appendChild(selectCol);
+  fieldSet.appendChild(selectRow);
+
+  // Create the second row for the remaining fields
+  const fieldsRow = document.createElement('div');
+  fieldsRow.classList.add('row');
+  const dateCol = document.createElement('div');
+  dateCol.classList.add('col-3');
+  const dateInput = createDateInput(`${fieldCount}-TFDTRAVDTE`, 'TRAVEL DATE*');
+  dateInput.style.width = '290px';
+
+  dateCol.appendChild(dateInput);
+  fieldsRow.appendChild(dateCol);
+
+  const dateCol2 = document.createElement('div');
+  dateCol2.classList.add('col-3');
+  const dateInput2 = createInput('text',`${fieldCount}-TFDAMNT`, 'AMOUNT*');
+  dateInput2.style.width = '290px';
+  dateInput2.style.marginLeft = '10px';
+  // dateInput2.classList.add('co-input'); 
+
+  dateCol2.appendChild(dateInput2);
+  fieldsRow.appendChild(dateCol2);
+
+  const fromCol = document.createElement('div');
+  fromCol.classList.add('col-3');
+  const currencyType = createVisaTypeSelect(`${fieldCount}-TFDCURR`, 'CURRENCY*');
+  currencyType.style.width = '290px';
+  // visaType.style.marginBottom = '15px';
+  currencyType.style.marginLeft = '15px';
+  
+  // const fromCol = document.createElement('div');
+  // fromCol.classList.add('col-3');
+  // const fromInput = createInput('text',`${fieldCount}-TFLDFRMPLC`, 'VISA FEES');
+  // fromInput.style.width = '290px';
+  // fromInput.style.marginLeft = '15px';
+
+  fromCol.appendChild(currencyType);
+  fieldsRow.appendChild(fromCol);
+
+  const toCol = document.createElement('div');
+  toCol.classList.add('col-3');
+  const toInput = createInput('text',`${fieldCount}-TFDREMARK`, 'REMARKS');
+  toInput.style.width = '290px';
+  toInput.style.marginLeft = '18px';
+  // toInput.classList.add('to-input');
+  toCol.appendChild(toInput);
+  fieldsRow.appendChild(toCol);
+
+  fieldSet.appendChild(fieldsRow);
+
+  // Append the fieldSet div to the container div
+  fieldContainer.appendChild(fieldSet);
+
+  // Update the management form with the new total form count
+  formsetManagementForm.setAttribute('value', `${fieldCount + 1}`);
+
+  fieldCount++;
+  updateFieldAttributes();
+  });
+
+
+  function createSelect(name, label) {
+  const selectDiv = document.createElement('div');
+  selectDiv.classList.add('col-3');
+
+  const labelElement = document.createElement('label');
+  labelElement.classList.add('form-label');
+  labelElement.textContent = label;
+
+  const selectElement = document.createElement('select');
+  selectElement.classList.add('form-select');
+  selectElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+  // Add options to the select element
+  const option1 = document.createElement('option');
+  option1.textContent = 'Card';
+  option1.setAttribute('value', 'Card');
+  selectElement.appendChild(option1);
+
+  const option2 = document.createElement('option');
+  option2.textContent = 'Cash';
+  option2.setAttribute('value', 'Cash');
+  selectElement.appendChild(option2);
+
+
+  selectDiv.appendChild(labelElement);
+  selectDiv.appendChild(selectElement);
+
+  return selectDiv;
+}
+
+function createVisaTypeSelect(name, label) {
+  const selectDiv = document.createElement('div');
+  selectDiv.classList.add('col-3');
+
+  const labelElement = document.createElement('label');
+  labelElement.classList.add('form-label');
+  labelElement.textContent = label;
+
+  const selectElement = document.createElement('select');
+  selectElement.classList.add('form-select');
+  selectElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+  // Add options to the select element
+  const option1 = document.createElement('option');
+  option1.textContent = 'US Dollar(USD)';
+  option1.setAttribute('value', 'USD');
+  selectElement.appendChild(option1);
+
+  const option2 = document.createElement('option');
+  option2.textContent = 'Euro(EUR)';
+  option2.setAttribute('value', 'EUR');
+  selectElement.appendChild(option2);
+
+  const option3 = document.createElement('option');
+  option3.textContent = 'Pound Sterling(GBP)';
+  option3.setAttribute('value', 'GBP');
+  selectElement.appendChild(option3);
+
+  selectDiv.appendChild(labelElement);
+  selectDiv.appendChild(selectElement);
+
+  return selectDiv;
+}
+
+
+
+  function createInput(type, name, label) {
+    const inputDiv = document.createElement('div');
+    inputDiv.classList.add('col');
+
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('form-label');
+    labelElement.textContent = label;
+
+    const inputElement = document.createElement('input');
+    inputElement.classList.add('form-control');
+    inputElement.setAttribute('type', type);
+    inputElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+    inputDiv.appendChild(labelElement);
+    inputDiv.appendChild(inputElement);
+
+
+    return inputDiv;
+  }
+
+  function createDateInput(name, label) {
+    const inputDiv = document.createElement('div');
+    inputDiv.classList.add('col');
+
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('form-label');
+    labelElement.textContent = label;
+
+    const inputElement = document.createElement('input');
+    inputElement.classList.add('form-control');
+    inputElement.setAttribute('type', 'date');
+    inputElement.setAttribute('name', `${formsetPrefix}-${name}`);
+
+    const today = new Date().toISOString().split('T')[0];
+    inputElement.setAttribute('min', today);
+
+    inputDiv.appendChild(labelElement);
+    inputDiv.appendChild(inputElement);
+
+    return inputDiv;
+  }
+
+  function createRemoveLink(fieldSet) {
+    const linkDiv = document.createElement('div');
+    linkDiv.classList.add('col');
+
+    const removeLink = document.createElement('a');
+    removeLink.setAttribute('href', '#');
+
+    const iconElement = document.createElement('i');
+    iconElement.classList.add('fas', 'fa-trash-alt');
+    iconElement.style = 'float:right';
+    iconElement.style.color = 'red';
+    iconElement.style.marginTop = '40px';
+
+    removeLink.appendChild(iconElement);
+
+    removeLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      fieldSet.remove();
+    });
+
+    linkDiv.appendChild(removeLink);
+
+    return linkDiv;
+  }
+
+});
+
+$(document).ready(function() {
+    var today = new Date().toISOString().split('T')[0];
+    $('input[type="date"]').attr('min', today);
+});
+
+  var today = new Date().toISOString().split('T')[0];
+    var dateFields = document.querySelectorAll('input[name^="multicity-"][name$="-TFLDDTEOFTRV"]');
+    dateFields.forEach(function(field) {
+        field.setAttribute('min', today);
+    });
+
+</script>
+  
+  
+
+{% if header_form.errors %}
+  <div class="modal" tabindex="-1" id="hotelErrorModal" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Header Form Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <ul>
+              <li>Header form is not valid. Please check your input.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var modal = document.getElementById('hotelErrorModal');
+      var modalCloseBtn = modal.querySelector('.btn-secondary[data-bs-dismiss="modal"]');
+
+      modalCloseBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+    });
+  </script>
+
+{% elif flight_form.errors %}
+  <div class="modal" tabindex="-1" id="hotelErrorModal" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Flight Form Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <ul>
+              <li>Flight form is not valid. Please check your input.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var modal = document.getElementById('hotelErrorModal');
+      var modalCloseBtn = modal.querySelector('.btn-secondary[data-bs-dismiss="modal"]');
+
+      modalCloseBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+    });
+  </script>
+
+{% elif hotel_form.errors %}
+  <div class="modal" tabindex="-1" id="hotelErrorModal" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Hotel Form Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <ul>
+              <li>Hotel form is not valid. Please check your input.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var modal = document.getElementById('hotelErrorModal');
+      var modalCloseBtn = modal.querySelector('.btn-secondary[data-bs-dismiss="modal"]');
+
+      modalCloseBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+    });
+  </script>
+
+{% elif car_form.errors %}
+<div class="modal" tabindex="-1" id="hotelErrorModal" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Car Form Error</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger">
+          <ul>
+            <li>Car form is not valid. Please check your input.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var modal = document.getElementById('hotelErrorModal');
+    var modalCloseBtn = modal.querySelector('.btn-secondary[data-bs-dismiss="modal"]');
+
+    modalCloseBtn.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+  });
+</script>
+
+{% elif visa_form.errors %}
+  <div class="modal" tabindex="-1" id="hotelErrorModal" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Visa Form Error</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <ul>
+              <li>Visa form is not valid. Please check your input.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var modal = document.getElementById('hotelErrorModal');
+      var modalCloseBtn = modal.querySelector('.btn-secondary[data-bs-dismiss="modal"]');
+
+      modalCloseBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+    });
+  </script>
+
+{% elif forex_form.errors %}
+<div class="modal" tabindex="-1" id="hotelErrorModal" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Forex Form Error</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger">
+          <ul>
+            <li>Forex form is not valid. Please check your input.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var modal = document.getElementById('hotelErrorModal');
+    var modalCloseBtn = modal.querySelector('.btn-secondary[data-bs-dismiss="modal"]');
+
+    modalCloseBtn.addEventListener('click', function() {
+      modal.style.display = 'none';
+    });
+  });
+</script>
+
+{% endif %}
+
+
+
+{% if messages %}
+  {% for message in messages %}
+    {% if 'flight_form_success' in message.tags %}
+      <div class="modal show" tabindex="-1" id="flightFormSuccessModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Flight Form Success</h5>
+              <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>{{ message }}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          var modal = document.getElementById('flightFormSuccessModal');
+          var bootstrapModal = new bootstrap.Modal(modal);
+          bootstrapModal.show();
+        });
+      </script>
+    {% endif %}
+
+    {% if 'hotel_form_success' in message.tags %}
+      <div class="modal show" tabindex="-1" id="hotelFormSuccessModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Hotel Form Success</h5>
+              <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>{{ message }}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          var modal = document.getElementById('hotelFormSuccessModal');
+          var bootstrapModal = new bootstrap.Modal(modal);
+          bootstrapModal.show();
+        });
+      </script>
+    {% endif %}
+
+    {% if 'car_form_success' in message.tags %}
+    <div class="modal show" tabindex="-1" id="carFormSuccessModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Car Form Success</h5>
+            <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ message }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var modal = document.getElementById('carFormSuccessModal');
+        var bootstrapModal = new bootstrap.Modal(modal);
+        bootstrapModal.show();
+      });
+    </script>
+{% endif %}
+
+{% if 'visa_form_success' in message.tags %}
+<div class="modal show" tabindex="-1" id="visaFormSuccessModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Visa Form Success</h5>
+        <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ message }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var modal = document.getElementById('visaFormSuccessModal');
+    var bootstrapModal = new bootstrap.Modal(modal);
+    bootstrapModal.show();
+  });
+</script>
+{% endif %}
+
+{% if 'forex_form_success' in message.tags %}
+<div class="modal show" tabindex="-1" id="forexFormSuccessModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Hotel Form Success</h5>
+        <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ message }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var modal = document.getElementById('forexFormSuccessModal');
+    var bootstrapModal = new bootstrap.Modal(modal);
+    bootstrapModal.show();
+  });
+</script>
+
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+
+
+
+
+
+
+  <!-- {% for msg in messages %}
+  {% if msg %}
+  <div class="modal" tabindex="-1" id="mymodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Information Message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>{{ msg }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %} -->
+
+
+  <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #E9ECEF;border-bottom:solid white;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">
+        <img src="https://i.ibb.co/TbpT6p1/AAKIT-Logo.png" alt="" width="110" height="45" style="">
+        <!-- <span><i class="fa-solid fa-user-tie"></i></span> -->
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul">
+            
+            <li class="nav-item">
+        <a class="nav-link" href="#" style="color:#2F3233">{{ user.first_name }}</a>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="profile-mini" src=https://contacts.zoho.in/file?t=user&ID=60018445719&fs=thumb width="30" height="30" style="border-radius: 15px;"></a>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Manage my Account</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'mylogout' %}">Logout</a></li>
+              </ul>
+            </li>
+            
+          </ul>
+      </div>
+      
+    </div>
+  </nav>
+  <div class="row" style="margin-top: 7%;width: 94%;margin-left: 35px;height: 55px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="">
+        <div class="container-md">
+          <span><b>New Trip</b></span>
+        </div>
+    </nav>
+  </div>
+
+  <!-- <form method="post">
+    {% csrf_token %}
+    {{ travel_header_form.as_p }}
+    {{ flight_form.as_p }}
+    {{ hotel_form.as_p }}
+    {{ car_form.as_p }}
+    {{ visa_form.as_p }}
+    {{ forex_form.as_p }}
+    <button type="submit">Save</button>
+</form> -->
+
+<div class="container main_div" style="margin-top:20px;height:100%;margin-left:8%;">
+      <form id="main_form" action="" method="post" novalidate>
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-3" style="margin-left:-6.8%;margin-right: 18px;">
+          <label class="form-label" style="font-weight: 400; color: #b94a48;">Trip Name *</label>
+          <div class="" style="">
+           {{header_form.THTRPNAME}}
+          </div>
+          </div>
+          <div class="col-3" style="margin-right: 18px;">
+          <label class="form-label" style="font-weight: 400; color: #b94a48;">Project *</label>
+          <div class="" style="">
+           {{header_form.THPROJ}}
+          </div>
+          </div>
+          <div class="col-3" style="margin-right: 18px;">
+          <label class="form-label" style="font-weight: 400;">Business Purpose</label>
+          <div class="" style="">
+           {{header_form.THPURPOSE}}
+          </div>
+          </div>
+
+          <div class="col-3" style="">
+          <label class="form-label" style="font-weight: 400; color: #b94a48;">Travel Type *</label>
+          <div class="" style="">
+           {{header_form.THTRVTYP}}
+          </div>
+          </div>
+          <div class="col-3" style="display: none;">
+            <label class="form-label" style="font-weight: 400; color: #b94a48;">Travel Type *</label>
+            <div class="" style="">
+             {{header_form.THSTUSTYP}}
+            </div>
+            </div>
+        </div>
+        <!-- {{ header_form.as_p }} -->
+        <!-- {{ flight_form.as_p }} -->
+        <!-- <button class="btn btn-primary" type="submit" style="margin-top: 30px;width: 16%;margin-left: -87px;">Save</button> -->
+      <!-- </form> -->
+
+      <div class="row" style="margin-left:-89px;margin-top:24px;width: 104%;height: 55px;margin-bottom: 20px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="">
+            <div class="container-md">
+              <span><b>Trip Itinerary</b></span>
+            </div>
+        </nav>
+      </div>
+        
+        
+
+        <div class="row" style="margin-bottom:15px;">
+        <div class=" col-2" style="margin-left: -5%;width:70px;margin-bottom: -14px;">
+                <svg style="height: 25px;width: 30px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M192 93.7C192 59.5 221 0 256 0c36 0 64 59.5 64 93.7l0 66.3L497.8 278.5c8.9 5.9 14.2 15.9 14.2 26.6v56.7c0 10.9-10.7 18.6-21.1 15.2L320 320v80l57.6 43.2c4 3 6.4 7.8 6.4 12.8v42c0 7.8-6.3 14-14 14c-1.3 0-2.6-.2-3.9-.5L256 480 145.9 511.5c-1.3 .4-2.6 .5-3.9 .5c-7.8 0-14-6.3-14-14V456c0-5 2.4-9.8 6.4-12.8L192 400V320L21.1 377C10.7 380.4 0 372.7 0 361.8V305.1c0-10.7 5.3-20.7 14.2-26.6L192 160V93.7z"/></svg>
+         <br>
+          <div class="font-weight-semibold font-medium" style="margin-left: -4%;">Flight</div>
+        </div>
+          <div class="col-10" style="margin-right: 80%; margin-top: -3%;">
+          <div class="card text-dark bg-light" style="width:117%">
+        
+        <div class="card-header">
+        <!-- <form action="" method="post">
+            {% csrf_token %} -->
+          <div id="id_TFLDTRPTYP">
+          <div class="form-check form-check-inline">
+            <label class="form-check-label" for="id_TFLDTRPTYP_0">
+            <input class="form-check-input dtype" type="radio" name="TFLDTRPTYP" value="One Way" required id="id_TFLDTRPTYP_0" checked>
+              One Way
+            </label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <label class="form-check-label" for="id_TFLDTRPTYP_1">
+              <input class="form-check-input dtype" type="radio" name="TFLDTRPTYP" value="Round Trip" required id="id_TFLDTRPTYP_1">
+              Round Trip
+            </label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <label class="form-check-label" for="id_TFLDTRPTYP_2">
+              <input class="form-check-input dtype" type="radio" name="TFLDTRPTYP" value="Multi-city" required id="id_TFLDTRPTYP_2">
+              Multi-city
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="radio_button" id="radio_button" value="on">
+            <label class="form-check-label" for="radio_button">
+                Not Required
+            </label>
+        </div>
+
+          </div>
+        </div>
+
+        <div class="card-body">
+           <div class="row" style="margin-top:15px;">
+
+            <div class="col-3" style="">
+              <label class="form-label" style="font-weight: 400;">Preferences</label>
+              <div class="" style="">
+               {{flight_form.TFLDPREF}}
+              </div>
+            </div>
+
+            <div class="col-3" style="">
+              <label class="form-label" style="font-weight: 400;">Preferred Airline</label>
+              <div class="" style="">
+               {{flight_form.TFLDPREFAIR}}
+              </div>
+            </div>   
+            
+            <div class="col-3" style="display: none;">
+              <label class="form-label" style="font-weight: 400;">Trip Name</label>
+              <div class="" style="">
+               {{flight_form.TFLDTRPNAME}}
+              </div>
+            </div> 
+
+           </div>
+           <div id="flight_form" class="row" style="margin-top:15px;margin-bottom: 10px;">
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">DEPART FROM*</label>
+                <div class="" style="">
+                 {{flight_form.TFLDFRMPLC}}
+                </div>
+              </div>
+
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">ARRIVE AT*</label>
+                <div class="" style="">
+                 {{flight_form.TFLDTOPLC}}
+                </div>
+              </div>
+
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">DEPARTURE DATE*</label>
+                <div class="" style="">
+                 {{flight_form.TFLDDTEOFTRV}}
+                </div>
+              </div>
+
+              <div class="col-3 rdate" id="div2" style="display: none;">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">RETURN DATE*</label>
+                <div class="" style="">
+                 {{flight_form.TFLDRETURN}}
+                </div>
+              </div>
+
+              <div id="field-container" style="margin-top: 15px;">
+                {{ multicity_formset.management_form }}
+              </div>
+
+              <div id="add-flight" style="display:none;">
+              <a id="" href="#" class="link-primary" style="text-decoration: none;">Add Flight</a>
+              </div>
+
+              <!-- <div id="add-flight" style="display:none;margin-bottom: 15px;margin-left: -12px;">
+                <a id="flight" href="#" class="link-primary" style="text-decoration: none;">Add Flight</a>
+              </div> -->
+
+            </div>
+            <!-- <input class="btn btn-primary" id="tsubmit" style="width:16%" type="submit" name="travel_view"
+            value="Submit"> -->
+         <!-- </form> -->
+        </div>
+            </div> 
+          </div>
+        </div>
+      <br>
+      <!-- <form action="" method="post"> -->
+      <div class="row" style="margin-bottom:15px;">
+        <div class="col" style="margin-left: -5%;width:70px;margin-bottom: -14px;">
+            <svg style="height: 25px;width: 30px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M32 0C14.3 0 0 14.3 0 32S14.3 64 32 64V448c-17.7 0-32 14.3-32 32s14.3 32 32 32H208V448h96v64H480c17.7 0 32-14.3 32-32s-14.3-32-32-32V64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zm80 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H112c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16zm112 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H240c-8.8 0-16-7.2-16-16V112zM368 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16zM96 208c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H112c-8.8 0-16-7.2-16-16V208zm144-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H240c-8.8 0-16-7.2-16-16V208c0-8.8 7.2-16 16-16zm112 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16V208zm-3 152.2c3.3 12.8-7.8 23.8-21 23.8H184c-13.3 0-24.3-10.9-21-23.8c10.6-41.5 48.2-72.2 93-72.2s82.5 30.7 93 72.2z"/></svg>
+          <div class="font-weight-semibold font-medium" style="margin-left: -5px;">Hotel</div>
+        </div>
+        <div class="col-10" style="margin-right: 80%; margin-top: -3%;">
+          <div class="card text-dark bg-light" style="width:117%">
+
+            <div class="card-header">
+                <div id="">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="hotel_radio_button" id="hotel_radio_button" value="on">
+                  <label class="form-check-label" for="hotel_radio_button">
+                      Not Required
+                  </label>
+                </div>
+                </div>
+            </div>
+        
+        <div class="card-body">
+         <!-- <form method="POST" action="" class="travel_form" novalidate style="">
+           {% csrf_token %} -->
+           <div class="row">
+            <div class="col-3" style="">
+              <label class="form-label" style="font-weight: 400;">Room Type</label>
+              <div class="" style="">
+               {{hotel_form.THDHTYPE}}
+              </div>
+            </div>
+           </div>
+
+           <div class="row" id="hotel_form" style="margin-top:15px;">
+              <div class="col-3 departdate" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">CHECK-IN DATE*</label>
+                <div class="" style="">
+                  {{hotel_form.THDCHKINDTE}}
+                </div>
+              </div>
+
+              <div class="col-3 departdate" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">CHECK-OUT DATE*</label>
+                <div class="" style="">
+                  {{hotel_form.THDCHKOTDTE}}
+                </div>
+              </div>
+
+              <div class="col-3 departdate" style="">
+                <label class="form-label" style="font-weight: 400;">PREFERRED HOTEL</label>
+                <div class="" style="">
+                  {{hotel_form.THDPREFHOTL}}
+                </div>
+              </div>
+
+              <div class="col-3 departdate" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">CITY*</label>
+                <div class="" style="">
+                  {{hotel_form.THDCITY}}
+                </div>
+              </div>
+
+            </div>
+
+            <!-- <div id="hotel_container" class="row" style="margin-top:17px;">
+  
+                <div class="col-3 departdate" style="">
+                  <label class="form-label" style="font-weight: 400;">PREFERRED HOTEL</label>
+                  <div class="" style="">
+                    {{hotel_form.THDPREFHOTL}}
+                  </div>
+                </div>
+
+                <div class="col-3 departdate" style="">
+                  <label class="form-label" style="font-weight: 400;">CITY</label>
+                  <div class="" style="">
+                    {{hotel_form.THDCITY}}
+                  </div>
+                </div>
+
+            </div> -->
+
+            <div id="field-container-hotel" style="margin-top: 17px;">
+              {{ multihotel_formset.management_form }}
+            </div>
+
+              <!-- <hr style="margin-top: 20px;"> -->
+            <div id="add-hotel" style="margin-top: 10px;">
+            <a href="#" class="link-primary" style="text-decoration: none;">Add Hotel</a>
+            </div>
+
+            <!-- <input class="btn btn-primary" id="tsubmit" style="width:16%" type="submit" name="travel_view"
+            value="Submit" > -->
+         <!-- </form> -->
+        </div>
+            </div> 
+        </div>
+      </div>
+      <!-- </form>   -->
+       <br>
+       <!-- <form action="" method="post"> -->
+      <div class="row" style="margin-bottom:15px;">
+        <div class="col" style="margin-left: -5%;width:70px;margin-bottom: -14px;">
+          <svg style="height: 25px;width: 30px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M135.2 117.4L109.1 192H402.9l-26.1-74.6C372.3 104.6 360.2 96 346.6 96H165.4c-13.6 0-25.7 8.6-30.2 21.4zM39.6 196.8L74.8 96.3C88.3 57.8 124.6 32 165.4 32H346.6c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2V400v48c0 17.7-14.3 32-32 32H448c-17.7 0-32-14.3-32-32V400H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V400 256c0-26.7 16.4-49.6 39.6-59.2zM128 288c0-17.7-14.3-32-32-32s-32 14.3-32 32s14.3 32 32 32s32-14.3 32-32zm288 32c17.7 0 32-14.3 32-32s-14.3-32-32-32s-32 14.3-32 32s14.3 32 32 32z"/></svg>   
+          <div class="font-weight-semibold font-medium" style="">Car</div>
+        </div>
+        <div class="col-10" style="margin-right: 80%; margin-top: -3%;">
+          <div class="card text-dark bg-light" style="width:117%">
+        
+            <div class="card-header">
+              <div id="">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="car_radio_button" id="car_radio_button" value="on">
+                <label class="form-check-label" for="car_radio_button">
+                    Not Required
+                </label>
+              </div>
+              </div>
+          </div>
+
+        <div class="card-body" >
+         <!-- <form method="POST" action="" class="travel_form" novalidate style="">
+           {% csrf_token %} -->
+           <div class="row">
+
+              <div class="col-3 departdate" style="">
+                <label class="form-label" style="font-weight: 400;">Car Type</label>
+                <div class="" style="">
+                 {{car_form.TCBDCTYP}}
+                </div>
+              </div>
+
+              <!-- <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;">REMARKS</label>
+                <div class="" style="">
+                 {{car_form.TCBDREM}}
+                </div>
+              </div> -->
+
+           </div>
+           <div class="row"  id="car" style="margin-top:15px;margin-bottom:15px;">
+
+              <div class="col-3 departdate" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">FROM LOCATION*</label>
+                <div class="" style="">
+                 {{car_form.TCBDFRLOC}}
+                </div>
+              </div>
+
+              <div class="col-3 departdate" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">TO LOCATION*</label>
+                <div class="" style="">
+                 {{car_form.TCBDTOLOC}}
+                </div>
+              </div>
+
+              <div class="col-3 departdate" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">PICKUP DATE*</label>
+                <div class="" style="">
+                 {{car_form.TCBDPIKU}}
+                </div>
+              </div>
+  
+              <div class="col-3 departdate" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">DROP DATE*</label>
+                <div class="" style="">
+                 {{car_form.TCBDDROP}}
+                </div>
+              </div>
+          </div>
+          
+          <!-- <div id="car_form" class="row" style="margin-bottom: 17px;">
+            <div class="col-3 departdate" style="">
+              <label class="form-label" style="font-weight: 400;color: #b94a48;">PICKUP DATE*</label>
+              <div class="" style="">
+               {{car_form.TCBDPIKU}}
+              </div>
+            </div>
+
+            <div class="col-3 departdate" style="">
+              <label class="form-label" style="font-weight: 400;color: #b94a48;">DROP DATE*</label>
+              <div class="" style="">
+               {{car_form.TCBDDROP}}
+              </div>
+            </div>
+
+            <div class="col-3" style="">
+              <label class="form-label" style="font-weight: 400;">REMARKS</label>
+              <div class="" style="">
+               {{car_form.TCBDREM}}
+              </div>
+            </div>
+
+          </div> -->
+              
+          <div id="field-container-car" style="margin-top: 17px;">
+            {{ multicar_formset.management_form }}
+          </div>
+
+
+            <div id="add-car" style="">
+            <a href="#" class="link-primary" style="text-decoration: none;" onClick="addCar()">Add Car Rental</a>
+            </div>
+
+        </div>
+            </div> 
+        </div>
+      </div>
+      <!-- <br> -->
+      <!-- <input class="btn btn-primary" id="tsubmit" style="width:16%" type="submit" name="travel_view"
+            value="Submit" > -->
+      <!-- </form> -->
+       <!-- <br> -->
+       
+    <br>
+       <!-- <form action="" method="post"> -->
+      <div class="row" style="margin-bottom: 17px;">
+        <div class="col" style="margin-left: -5%;width:70px;margin-bottom: -14px;">
+          <svg  style="height: 25px;width: 30px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M470.1 231.3s7.6 37.2 9.3 45H446c3.3-8.9 16-43.5 16-43.5-.2.3 3.3-9.1 5.3-14.9l2.8 13.4zM576 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h480c26.5 0 48 21.5 48 48zM152.5 331.2L215.7 176h-42.5l-39.3 106-4.3-21.5-14-71.4c-2.3-9.9-9.4-12.7-18.2-13.1H32.7l-.7 3.1c15.8 4 29.9 9.8 42.2 17.1l35.8 135h42.5zm94.4.2L272.1 176h-40.2l-25.1 155.4h40.1zm139.9-50.8c.2-17.7-10.6-31.2-33.7-42.3-14.1-7.1-22.7-11.9-22.7-19.2.2-6.6 7.3-13.4 23.1-13.4 13.1-.3 22.7 2.8 29.9 5.9l3.6 1.7 5.5-33.6c-7.9-3.1-20.5-6.6-36-6.6-39.7 0-67.6 21.2-67.8 51.4-.3 22.3 20 34.7 35.2 42.2 15.5 7.6 20.8 12.6 20.8 19.3-.2 10.4-12.6 15.2-24.1 15.2-16 0-24.6-2.5-37.7-8.3l-5.3-2.5-5.6 34.9c9.4 4.3 26.8 8.1 44.8 8.3 42.2.1 69.7-20.8 70-53zM528 331.4L495.6 176h-31.1c-9.6 0-16.9 2.8-21 12.9l-59.7 142.5H426s6.9-19.2 8.4-23.3H486c1.2 5.5 4.8 23.3 4.8 23.3H528z"/></svg>
+          <div class="font-weight-semibold font-medium" style="margin-left: -5px;">Visa</div>
+        </div>
+        <div class="col-10" style="margin-right: 80%; margin-top: -3%;">
+          <div class="card text-dark bg-light" style="width:117%">
+        
+            <div class="card-header">
+              <div id="">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="visa_radio_button" id="visa_radio_button" value="on">
+                <label class="form-check-label" for="visa_radio_button">
+                    Not Required
+                </label>
+              </div>
+              </div>
+          </div>
+        
+        <div class="card-body" >
+         <!-- <form method="POST" action="" class="travel_form" novalidate style="">
+           {% csrf_token %} -->
+           <div class="row">
+
+            <div class="col-3" style="width: 25.5%;">
+              <label class="form-label" style="font-weight: 400;">Visa Type</label>
+              <div class="" style="">
+               {{visa_form.TVDVISTYPE}}
+              </div>
+            </div>
+
+           </div>
+
+           <div class="row" id="visa_form" style="margin-top:15px;">
+
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">TRAVEL DATE*</label>
+                <div class="" style="">
+                 {{visa_form.TVDTRAVDTE}}
+                </div>
+              </div>
+
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">VISITING COUNTRY*</label>
+                <div class="" style="">
+                 {{visa_form.TVDVISTGCOUN}}
+                </div>
+              </div>
+
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;">VISA FEES</label>
+                <div class="" style="">
+                 {{visa_form.TVDVSAFES}}
+                </div>
+              </div>
+
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;">REMARKS</label>
+                <div class="" style="">
+                 {{visa_form.TVDREMK}}
+                </div>
+              </div>
+
+            </div>
+
+            <div id="field-container-visa" style="margin-top: 17px;">
+            {{ multivisa_formset.management_form }}
+            </div>
+
+            <div id="add-visa" style="margin-top: 12px;">
+            <a href="#" class="link-primary" style="text-decoration: none;">Add Visa</a>
+            </div>
+
+            <!-- <input class="btn btn-primary" id="tsubmit" style="width:16%;margin-top: 25px;" type="submit" name="travel_view"
+            value="Submit" > -->
+         <!-- </form> -->
+        </div>
+            </div> 
+          </div>
+      </div>
+      <br>
+      <!-- </form>   -->
+ 
+       <!-- <form action="" method="post" > -->
+      <div class="row">
+        <div class="col" style="margin-left: -5%;width:70px;margin-bottom: -14px;">
+          <svg  style="height: 25px;width: 30px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M512 80c0 18-14.3 34.6-38.4 48c-29.1 16.1-72.5 27.5-122.3 30.9c-3.7-1.8-7.4-3.5-11.3-5C300.6 137.4 248.2 128 192 128c-8.3 0-16.4 .2-24.5 .6l-1.1-.6C142.3 114.6 128 98 128 80c0-44.2 86-80 192-80S512 35.8 512 80zM160.7 161.1c10.2-.7 20.7-1.1 31.3-1.1c62.2 0 117.4 12.3 152.5 31.4C369.3 204.9 384 221.7 384 240c0 4-.7 7.9-2.1 11.7c-4.6 13.2-17 25.3-35 35.5c0 0 0 0 0 0c-.1 .1-.3 .1-.4 .2l0 0 0 0c-.3 .2-.6 .3-.9 .5c-35 19.4-90.8 32-153.6 32c-59.6 0-112.9-11.3-148.2-29.1c-1.9-.9-3.7-1.9-5.5-2.9C14.3 274.6 0 258 0 240c0-34.8 53.4-64.5 128-75.4c10.5-1.5 21.4-2.7 32.7-3.5zM416 240c0-21.9-10.6-39.9-24.1-53.4c28.3-4.4 54.2-11.4 76.2-20.5c16.3-6.8 31.5-15.2 43.9-25.5V176c0 19.3-16.5 37.1-43.8 50.9c-14.6 7.4-32.4 13.7-52.4 18.5c.1-1.8 .2-3.5 .2-5.3zm-32 96c0 18-14.3 34.6-38.4 48c-1.8 1-3.6 1.9-5.5 2.9C304.9 404.7 251.6 416 192 416c-62.8 0-118.6-12.6-153.6-32C14.3 370.6 0 354 0 336V300.6c12.5 10.3 27.6 18.7 43.9 25.5C83.4 342.6 135.8 352 192 352s108.6-9.4 148.1-25.9c7.8-3.2 15.3-6.9 22.4-10.9c6.1-3.4 11.8-7.2 17.2-11.2c1.5-1.1 2.9-2.3 4.3-3.4V304v5.7V336zm32 0V304 278.1c19-4.2 36.5-9.5 52.1-16c16.3-6.8 31.5-15.2 43.9-25.5V272c0 10.5-5 21-14.9 30.9c-16.3 16.3-45 29.7-81.3 38.4c.1-1.7 .2-3.5 .2-5.3zM192 448c56.2 0 108.6-9.4 148.1-25.9c16.3-6.8 31.5-15.2 43.9-25.5V432c0 44.2-86 80-192 80S0 476.2 0 432V396.6c12.5 10.3 27.6 18.7 43.9 25.5C83.4 438.6 135.8 448 192 448z"/></svg>  
+          <div class="font-weight-semibold font-medium" style="margin-left: -5px;">Forex</div>
+        </div>
+        <div class="col-10" style="margin-right: 80%; margin-top: -3%;">
+          <div class="card text-dark bg-light" style="width:117%">
+        
+          <div class="card-header">
+              <div id="">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="forex_radio_button" id="forex_radio_button" value="on">
+                <label class="form-check-label" for="forex_radio_button">
+                    Not Required
+                </label>
+              </div>
+              </div>
+          </div>
+
+        <div class="card-body" >
+         <!-- <form method="POST" action="" class="travel_form" novalidate style="">
+           {% csrf_token %} -->
+           <div class="row">
+
+            <div class="col-3" style="">
+              <label class="form-label" style="font-weight: 400;">Type</label>
+              <div class="" style="">
+               {{forex_form.TFDCSHTYPE}}
+              </div>
+            </div>
+
+           </div>
+
+           <div class="row" id="forex_form" style="margin-top:15px;">
+
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">TRAVEL DATE*</label>
+                <div class="" style="">
+                 {{forex_form.TFDTRAVDTE}}
+                </div>
+              </div>
+
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">AMOUNT*</label>
+                <div class="" style="">
+                 {{forex_form.TFDAMNT}}
+                </div>
+              </div>
+
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;color: #b94a48;">CURRENCY*</label>
+                <div class="" style="">
+                 {{forex_form.TFDCURR}}
+                </div>
+              </div>
+
+              <div class="col-3" style="">
+                <label class="form-label" style="font-weight: 400;">REMARKS</label>
+                <div class="" style="">
+                 {{forex_form.TFDREMARK}}
+                </div>
+              </div>
+
+
+              <div id="field-container-forex" style="margin-top: 17px;">
+                {{ multiforex_formset.management_form }}
+              </div>
+
+              <div id="add-forex" style="margin-top: 12px;">
+                <a href="#" class="link-primary" style="text-decoration: none;">Add Currency</a>
+              </div>
+          </div>
+
+            </div> 
+          </div>
+      </div>
+      <input class="btn btn-primary" id="tsubmit" style="width:16%;margin-bottom: 50px;margin-top: 35px;margin-left: 10px;" type="submit" name="travel_view"
+      value="Submit" >
+      </form>  
+    
+</div>
+
+<footer class="text-center fixed-bottom" style="height:4%;padding:8px;background-color:#E9ECEF;color:black;border-top:solid white;">
+    <div class="text-center">
+      <small>Copyright  2022 - All rights reserved</small>
+      <a href=http://www.aakit.com target="_blank">AAKIT</a>
+</footer>
+

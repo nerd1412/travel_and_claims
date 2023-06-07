@@ -1,0 +1,350 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
+    <link rel="stylesheet" href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="shortcut icon" href=https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/images/favicon.ico>
+    <link rel="mask-icon" href=https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/images/favicon-7d3a75df3c13715d4a8002008a877d0a.svg>
+    <link rel="stylesheet" href=https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/styles/vendor-a3c3ac7386caf0cb9c58905c1b8e6d04.css onerror="notifyOnFailure('https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/styles/vendor-a3c3ac7386caf0cb9c58905c1b8e6d04.css')">
+    <link rel="stylesheet" href=https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/styles/zexpense-880b90685c29529111773fdde7070a63.css onerror="notifyOnFailure('https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/styles/zexpense-880b90685c29529111773fdde7070a63.css')">
+    <link rel="stylesheet" href=https://css.zohocdn.com/ichat/css/Dec_12_2022_1_wmsbar.css>
+    <!-- JavaScript Bundle with Popper -->
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+    
+      *{
+        font-family: 'Poppins', sans-serif;
+      }
+      .ul{
+        margin-left: 80%;
+      }
+      .navbar-center{
+        margin-left: 61%;
+      }
+      @media (max-width: 991px) {
+      .navbar-center {
+        margin-left: -0.2%;
+      }
+    }
+      @media (max-width: 991px) {
+      .ul {
+        margin-left: -0.2%;
+      }
+    }
+  
+    .main-nav-menus {
+    background: #f3f3fa;
+    border-right: 1px solid #ececf9;
+    border-left: 1px solid transparent;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 210px;
+    margin-top: 53px;
+   
+    }
+  
+    .profile-mini  {
+    width: 32px;
+    height: 30px;
+    border-radius: 16px;
+    border: 1px solid #fff;
+  }
+  .record-expense-container .receipt-section .upload-arrow-container {
+    padding: 19px 20px;
+    padding-top: 19px;
+    padding-right: 20px;
+    padding-bottom: 19px;
+    padding-left: 20px;
+}
+.upload-arrow-container {
+    position: relative;
+    border-radius: 50%;
+    padding: 20px 22px 19px;
+    display: inline-block;
+    background-color: #fbfbfe;
+    box-shadow: 0 0 4px #dcdfec;
+}
+.ember-application * {
+    outline: 0!important;
+    outline-color: initial;
+    outline-style: initial;
+    outline-width: 0px;
+}div.scroll {
+ 
+ width: 600px;
+ height: 600px;
+ overflow-x: hidden;
+ overflow-y: auto;
+ padding: 20px;
+}
+    </style>
+  
+  
+  
+      <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+  
+  *{
+    font-family: 'Poppins', sans-serif;
+  }
+        .col-12.tform {
+            margin-top: 61px;
+            margin-bottom: 10%;
+        } */
+        .col-10.ttypes {
+            margin-top: 108px;
+        } */
+           a{
+          text-decoration: none;
+          padding: 15px;
+        }
+        .col-10.ttypes {
+            text-align: center;
+            margin-top: 108px;
+            margin-left: 145px;
+        } 
+        input.btn {
+            margin-top: 19px;
+        }
+        
+    .card.text-dark.bg-light {
+      margin-top: 15px;
+  }
+  .card.text-dark.bg-light {
+      margin-top: 35px;
+  }
+  a.back {
+      text-decoration: none;
+      margin-left: 90%;
+  }
+  h5.fname {
+      margin-left: 65%;
+      margin-top: 6px;
+  }
+
+
+</style>
+      <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+      <!-- CSS only -->
+      <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+      <!-- JavaScript Bundle with Popper -->
+      <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+      </script>
+     
+      <script src="https://kit.fontawesome.com/8a22801ec2.js" crossorigin="anonymous">
+
+      </script>
+
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     
+      {% load static %}
+    </head>
+    <script>
+      $(document).ready(function () {
+       
+          
+        $("#mymodal").modal('show')
+      });
+    
+    </script>
+    {% for msg in messages %}
+     {% if msg %}
+  <div class="modal" tabindex="-1" id="mymodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Information Message</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ msg }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+  
+  
+  <br/>
+  
+  <nav class="navbar navbar-expand-lg bg-light" style="padding-top:2px;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">
+        <img src=https://i.ibb.co/TbpT6p1/AAKIT-Logo.png alt="" width="110" height="">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav-item navbar-nav navbar-center">
+          <li><a class="nav-link" href="/expense">Expenses</a></li>
+          <li><a class="nav-link" href="/advanceexp">Advances</a></li>
+      <li><a class="nav-link" href="#">Approvals</a></li>
+      </ul>
+      </div>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#">{{ user.first_name }}</a>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="profile-mini" src=https://contacts.zoho.in/file?t=user&ID=60018445719&fs=thumb width="30" height="30"></a>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Manage my Account</a></li>
+                <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'mylogin' %}">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+      </div>
+      
+    </div>
+  </nav>
+
+<div class="row container-fluid">
+    <div class="col-8" style="margin-left: 3%; margin-top: 5%">
+        <div class="card" style="height: 100%;">
+            <!-- <i class="fa-solid fa-folder-plus" style=" margin-left:41%; margin-top:30%;height: 10%;width: 10%;"></i> -->
+            <div class="upload-arrow-container bg-white " style="margin-left:40%; margin-top:20%; margin-right: 40%;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="12 12 512 512" class="icon-md text-semi-muted align-middle" style="margin-left: 40%; margin-right:30%;" ><path d="M478.2 200.3 294.9 17c-21.5-21.5-56.3-21.5-77.8 0L33.8 200.3c-21.5 21.5-21.5 56.3 0 77.8s56.3 21.5 77.8 0l89.4-89.4v267.4c0 30.4 24.6 55 55 55s55-24.6 55-55V188.7l89.4 89.4c10.7 10.7 24.8 16.1 38.9 16.1s28.2-5.4 38.9-16.1c21.5-21.5 21.5-56.3 0-77.8z" ></path></svg>
+            </div>
+            <p>
+                <div class="mt-2 text-semi-muted mx-3 text-wrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Attach receipts from <span id="attach-from-computer" class="block-upload-propagation">
+                    <button class="btn btn-link p-0 file-upload align-baseline" type="button">
+                      <input aria-label="Attach documents from computer" multiple="" accept="image/gif,image/jpeg,image/png,image/bmp,application/pdf,text/xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" id="ember84" class="upload ember-view" type="file">
+                      computer
+                    </button>
+                  </span> or <span id="attach-from-cloud" class="block-upload-propagation">
+                    <button class="btn btn-link p-0 align-baseline text-lowercase" type="button" data-ember-action="" data-ember-action-86="86">
+                      Cloud
+                    </button>
+                  </span>
+                  </div>
+            </p>
+
+
+            
+          </div>
+    </div>
+
+
+    <div class="col scroll">
+        <form class="row" style="margin-left: 1%;">
+            <div class="col-md-11" >
+                &nbsp;
+            <div class="col-8">
+            <label for="date" class="form-label" style="font-size: small;"><b>Expense date</b></label>
+            <input type="date" class="form-control form-select-sm" id="date" >
+            </div>
+             &nbsp;
+            <div class="col-12">
+            <label for="Week" class="form-label" style="font-size: small;"><b>Week</b></label>
+            <input type="text" class="form-control form-select-sm" id="Week" >
+            </div>
+            &nbsp;
+            <div class="col-12">
+            <label for="Day" class="form-label" style="font-size: small;"><b>Day</b></label>
+            <input type="text" class="form-control form-select-sm" id="day">
+            </div>
+            &nbsp;
+            <div class="col-12">
+                <label for="Week" class="form-label" style="font-size: small;"><b>Expense Title</b></label>
+                <input type="text" class="form-control form-select-sm" id="Week" >
+            </div>
+            &nbsp;
+            <div class="col-12">
+                <label for="Day" class="form-label" style="font-size: small;"><b>Sub Expense Title</b></label>
+                <input type="text" class="form-control form-select-sm" id="day">
+            </div>
+            
+            &nbsp;
+            <div class="col-8">
+              <label for="ProjectID" class="form-label" style="font-size: small;"><b>Project ID</b></label>
+              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                  <option value="1">-- Select Project Id --</option>
+                  <option value="1">1001 Plant Rollout Out</option>
+                  <option value="2">1002 Madhura Plant Rollout</option>
+                  <option value="3">1003 AAKIT Ticketing Tool</option>
+              </select>
+              </div>
+              &nbsp;
+              <div class="col-8">
+                  <label for="WBSID" class="form-label" style="font-size: small;"><b>WBS ID</b></label>
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                  <option value="1">-- Select WBS Id --</option>
+                  <option value="1">2001 AAKIT-Lavenir</option>
+                  <option value="2">2002 NCCL HR Project</option>
+                  <option value="3">2003 Solution Road Map</option>
+                  </select>
+              </div>
+              &nbsp;
+              <div class="col-8">
+                  <label for="InternalOrderID" class="form-label" style="font-size: small;"><b>Internal Order ID</b></label>
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                  <option value="1">-- Select Internal Order Id --</option>
+                  <option value="1">3001 AAKIT Website</option>
+                  <option value="2">3002 AAKIt Presales </option>
+                  <option value="3">3003 AAKIT Knowledge Transfer</option>
+                  </select>
+              </div>
+              &nbsp;
+              <div class="col-8">
+                  <label for="WorkCenterID" class="form-label" style="font-size: small;"><b>WorkCenter ID</b></label>
+                  <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                  <option value="1">-- Select WorkCenter Id --</option>
+                  <option value="1">4001 Work From Home</option>
+                  <option value="2">4002 AAKIT Technologies</option>
+                  <option value="3">4003 On Field Sales/Presale</option>
+                  </select>
+              </div>
+              &nbsp;
+            <div class="col-12">
+            <label for="Amount" class="form-label" style="font-size: small;"><b>Amount</b></label>
+            <input type="text" class="form-control form-select-sm" id="inputZip">
+            </div>
+            &nbsp;
+            <div class="col-12">
+                <label for="Description" class="form-label" style="font-size: small;"><b>Description</b></label>
+                <input type="text" class="form-control form-select-sm" id="Description" >
+            </div>
+            <br/>
+            <div class="col-12">
+            <button type="submit" class="btn btn-dark" style="font-size: small;"><b>Submit</b></button>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+<footer class="text-center fixed-bottom bg-light " style="height:4%;padding:8px;background-color:rgb(235,236,237);color:black">
+  <div class="text-center">
+    <small>Copyright  2022 - All rights reserved</small>
+    <a href=http://www.aakit.com target="_blank">AAKIT</a>
+</footer>
+</body>
+</html>

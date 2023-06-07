@@ -1,0 +1,175 @@
+              
+
+    <head>
+        <style>
+              @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+    
+    *{
+      font-family: 'Poppins', sans-serif;
+    }
+          /* .col-12.tform {
+              margin-top: 61px;
+              margin-bottom: 10%;
+          } */
+          /* .col-10.ttypes {
+              margin-top: 108px;
+          } */
+          a{
+            text-decoration: none;
+            padding: 15px;
+          }
+          .col-10.ttypes {
+              text-align: center;
+              margin-top: 108px;
+              margin-left: 145px;
+          }
+          input.btn {
+              margin-top: 19px;
+          }
+          select#id_travel_type {
+          display: none;
+      }
+      select#id_PETYSTATUS {
+          display: none;
+      }
+      .card.text-dark.bg-light {
+        margin-top: 15px;
+    }
+    .card.text-dark.bg-light {
+        margin-top: 35px;
+    }
+    a.back {
+        text-decoration: none;
+        margin-left: 90%;
+    }
+    h5.fname {
+        margin-left: 65%;
+        margin-top: 6px;
+    }
+    /* input#id_PETYDR2,#id_PETYDR1,#id_PETYDR3 {
+        width: 88%;
+        margin-left: 26px;
+    } */
+  label.col.col-form-label {
+      margin-left: 10px;
+  }
+  #itsubmit {
+      margin-left: 12px;
+  }
+  /* input#id_PETYNAME,#id_PETYDESIG,#id_PETYGRADE,#id_PETYEMPCOD,#id_PETYDEPART,
+  #id_PETYMODETRANS,#id_PETYPROJECT,#id_PETYTIME,#id_PETYDATE,#id_PETYAMOUNT,
+  #id_PETYPURPEXP,#id_PETYDR1,#id_PETYDR2,#id_PETYDR3,#id_PETYDR4,#id_PETYWORKC {
+      margin-left: 10px;
+      width: 94%;
+  } */
+          </style>
+          <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+          <!-- CSS only -->
+          <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+          <!-- JavaScript Bundle with Popper -->
+          <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+          </script>
+         
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <!-- <script>
+            $(document).ready(function () {
+            $("#itsubmit").click(function () {
+              $("#id_travel_type").val("International");
+            });
+          });
+          </script> -->
+          {% load static %}
+      </head>
+      <script>
+        $(document).ready(function () {
+         
+            
+          $("#mymodal").modal('show')
+        });
+      
+      </script>
+      <script>
+        $(document).ready(function () {
+        $( "#id_WCWORKCEN" ).prop( "readonly", true );
+      });
+      </script>
+      {% for msg in messages %}
+       {% if msg %}
+  <div class="modal" tabindex="-1" id="mymodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Information Message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>{{ msg }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+
+
+  <div class="container-fluid" style=" height: 100%;background-color:#f2f2f2; ">
+    <div class="col" >
+      <a href="{% url 'work_save' %}" style="float:right;text-decoration:none;margin-right:6px;margin-top: 3%;"> <b>Back</b></a>
+      </div>
+
+
+      <div class="container"> 
+        <!-- <div class="row"> -->
+          
+          <div class="row">
+           
+              <div class="col-6 tform" style="margin-top: 5%;height: 100%;margin-left: 25%;">
+                
+                  <div class="card text-dark bg-light">
+                      <div class="card-header" style="background-color:#dce9f9">
+                        <h3><b>Work Centre Form</b></h3>
+                      </div>
+                      <div class="card-body">
+                       <form method="POST" action="" class="travel_form" novalidate style="padding:5px;">
+                         {% csrf_token %}
+                         <div class="row" style="margin-bottom: 10px;">
+                            <!-- <label class="col col-form-label">Name  :</label> -->
+                            <div class="col">
+                            <label class="col col-form-label">Work Centre</label>
+                              {{wform.WCWRKCNTR}}
+                            </div>
+                         </div>
+
+                         <div class="row" style="margin-bottom: 10px;">
+                            <!-- <label class="col col-form-label">Name  :</label> -->
+                            <div class="col">
+                            <label class="col col-form-label">Work Centre Description</label>
+                              {{wform.WCWRKCNTRDESP}}
+                            </div>
+                         </div>
+
+                         <input class="btn" id="itsubmit" style="background-color: rgb(52,49,49);color: white;width: 14%;" type="submit" name="itravel_view"
+                    value="Submit" >
+                       </form>
+                       </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+
+      <footer class="text-center fixed-bottom bg-light " style="height:5%;padding:8px;">
+        <div class="text-center " style="background-color: rgba(0, 0, 0, 0.05);">
+          <p style="text-align:center;   ">Copyright 2022 - All rights reserved.
+            <a href=http://www.aakit.com target="_blank">AAKIT</a> </p>
+        </div>
+      </footer>
+      

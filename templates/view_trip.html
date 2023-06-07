@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+      <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+            <!-- CSS only -->
+      <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+            <!-- JavaScript Bundle with Popper -->
+      <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+              integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+      </script>        
+      <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
+  
+  
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+    
+      *{
+        font-family: 'Poppins', sans-serif;
+      }
+      .homelink:hover {background-color:rebeccapurple;}
+      
+      .ul{
+          margin-left: 90%;
+        }
+        
+        .navbar-center{
+          margin-left: 61%;
+        }
+        @media (max-width: 991px) {
+        .navbar-center {
+          margin-left: -0.2%;
+        }
+      }
+        @media (max-width: 991px) {
+        .ul {
+          margin-left: -0.2%;
+        }
+      }
+      th {
+      background-color: #f2f2f2;
+      color: #333;
+      font-weight: bold;
+      padding: 10px;
+    }
+    </style>
+  
+        <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+        <!-- CSS only -->
+        <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+          integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+        </script>
+  {% load static %}
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #E9ECEF;border-bottom:solid white;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/home">
+            <img src="https://i.ibb.co/TbpT6p1/AAKIT-Logo.png" alt="" width="110" height="45">
+            <!-- <span><i class="fa-solid fa-user-tie"></i></span> -->
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul" style="margin-left: 91%;">
+                
+                <li class="nav-item">
+            <a class="nav-link" href="#" style="color:#2F3233">{{ user.first_name }}</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="profile-mini" src=https://contacts.zoho.in/file?t=user&ID=60018445719&fs=thumb width="30" height="30" style="border-radius: 15px;"></a>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">Manage my Account</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'mylogout' %}">Logout</a></li>
+                  </ul>
+                </li>
+                
+              </ul>
+          </div>
+          
+        </div>
+    </nav>
+  <div class="container">
+    <!-- <div class="row" style="margin-top: 10%;">
+        <div class="col">
+          <form method="GET" action="{% url 'view_trip' %}">
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="thintrid">Trip ID</label>
+                <input type="text" name="thintrid" id="thintrid" placeholder="Enter Trip ID" class="form-control" value="{{ request.GET.thintrid }}">
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="thproj">Project</label>
+                <input type="text" name="thproj" id="thproj" class="form-control" value="{{ request.GET.thproj }}">
+              </div>
+              
+              <div class="form-group col-md-4">
+                <label for="thtrvtyp">Travel Type</label>
+                <input type="text" name="thtrvtyp" id="thtrvtyp" class="form-control" value="{{ request.GET.thtrvtyp }}">
+              </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+    </div> -->
+
+    <div class="row" style="margin-top: 10%;">
+      <div class="col">
+        <form method="GET" action="{% url 'view_trip' %}">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="thintrid">Trip ID</label>
+                <input type="text" name="thintrid" id="thintrid" placeholder="Enter Trip ID" class="form-control" value="{{ request.GET.thintrid }}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="thproj">Project</label>
+                <input type="text" name="thproj" id="thproj" class="form-control" value="{{ request.GET.thproj }}">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="thtrvtyp">Travel Type</label>
+                <input type="text" name="thtrvtyp" id="thtrvtyp" class="form-control" value="{{ request.GET.thtrvtyp }}">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
+        </form>
+      </div>
+    </div>
+    
+    
+    <div class="row mt-4">
+      <div class="col">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Trip ID</th>
+              <th>Select</th>
+              <th>Project</th>
+              <th>Business Purpose</th>
+              <th>Travel Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in page_obj %}
+            <tr>
+                <td>{{ item.THINTRID }}</td>
+                <!-- <td><a href="/view_trip_details" style="text-decoration: none;">{{ item.THTRPNAME }}</a></td> -->
+                <td><a href="{% url 'trip_details' item.THINTRID %}" style="text-decoration: none;">{{ item.THTRPNAME }}</a></td>
+                <td>{{ item.THPROJ }}</td>
+                <td>{{ item.THPURPOSE }}</td>
+                <td>{{ item.THTRVTYP }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        <nav style="margin-bottom: 5%;">
+          <ul class="pagination justify-content-center">
+              {% if page_obj.has_previous %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page=1">&laquo; First</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                  </li>
+              {% endif %}
+      
+              <li class="page-item active">
+                  <span class="page-link">{{ page_obj.number }}</span>
+              </li>
+      
+              {% if page_obj.has_next %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                  </li>
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                  </li>
+              {% endif %}
+          </ul>
+        </nav>
+        <a href="http://"></a>
+      </div>
+    </div>
+  </div>
+    <footer class="text-center fixed-bottom" style="height:4%;padding:8px;background-color:#E9ECEF;color:black;border-top:solid white;">
+        <div class="text-center">
+          <small>Copyright  2022 - All rights reserved</small>
+          <a href=http://www.aakit.com target="_blank">AAKIT</a>
+    </footer>
+ 

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Trip Details</title>
+  {% load static %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+      <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+            <!-- CSS only -->
+      <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+              integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+            <!-- JavaScript Bundle with Popper -->
+      <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+              integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+      </script>        
+      <link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css>
+  
+  
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+    
+      *{
+        font-family: 'Poppins', sans-serif;
+      }
+      .homelink:hover {background-color:rebeccapurple;}
+      
+      .ul{
+          margin-left: 90%;
+        }
+        
+        .navbar-center{
+          margin-left: 61%;
+        }
+        @media (max-width: 991px) {
+        .navbar-center {
+          margin-left: -0.2%;
+        }
+      }
+        @media (max-width: 991px) {
+        .ul {
+          margin-left: -0.2%;
+        }
+      }
+      th {
+      background-color: #f2f2f2;
+      color: #333;
+      font-weight: bold;
+      padding: 10px;
+    }
+    </style>
+  
+        <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+        <!-- CSS only -->
+        <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+          integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+        </script>
+  {% load static %}
+</head>
+<body>
+  <!-- <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Details updated successfully!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if success %}
+    <script>
+        $(document).ready(function() {
+            $('#successModal').modal('show');
+        });
+    </script>
+{% endif %} -->
+<!-- {% if success_message %}
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>{{ success_message }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Show the modal on page load
+  $(document).ready(function() {
+    $('.modal').modal('show');
+  });
+</script>
+{% endif %} -->
+    <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #E9ECEF;border-bottom:solid white;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/home">
+            <img src="https://i.ibb.co/TbpT6p1/AAKIT-Logo.png" alt="" width="110" height="45">
+            <!-- <span><i class="fa-solid fa-user-tie"></i></span> -->
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul" style="margin-left: 91%;">
+                
+                <li class="nav-item">
+            <a class="nav-link" href="#" style="color:#2F3233">{{ user.first_name }}</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="profile-mini" src=https://contacts.zoho.in/file?t=user&ID=60018445719&fs=thumb width="30" height="30" style="border-radius: 15px;"></a>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#">Manage my Account</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'mylogout' %}">Logout</a></li>
+                  </ul>
+                </li>
+                
+              </ul>
+          </div>
+          
+        </div>
+    </nav>
+  <div class="container">
+    <!-- <div class="row" style="margin-top: 10%;">
+        <div class="col">
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="tripId">Trip ID</label>
+                <input type="text" class="form-control" id="tripId" placeholder="Enter Trip ID">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="project">Project</label>
+                <select class="form-control" id="project">
+                  <option value="AAKIT Technologies">AAKIT Technologies</option>
+                  <option value="Another Project">Another Project</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="travelType">Travel Type</label>
+                <select class="form-control" id="travelType">
+                  <option value="Domestic">Domestic</option>
+                  <option value="International">International</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/view_trip" style="float:right;text-decoration: none;">View Trips</a>
+          </form>
+        </div>
+    </div> -->
+    <div class="row" style="margin-top: 7%;">
+      <div class="col-md-8 offset-md-4">
+        <a href="/view_trip" style="margin-left:89%;text-decoration: none;">View Trips</a>
+      </div>
+    </div>
+    
+    <div class="row" style="" id="flight-section">
+      <div class="col-md-12" style="margin-bottom: 3%;">
+        <h5>Flight Details</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-md-3">Trip ID</th>
+              <th class="col-md-3">Flight Type</th>
+              <th class="col-md-3">Depart from</th>
+              <th class="col-md-3">Arrive at</th>
+              <th class="col-md-3">Edit</th>
+              <th class="col-md-3">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for flight in flights %}
+            <div class="row">
+              <tr>
+                <td class="col-md-3">{{ flight.TFLDINTRID }}</td>
+                <td class="col-md-3">{{ flight.TFLDTRPTYP }}</td>
+                <td class="col-md-3">{{ flight.TFLDFRMPLC }}</td>
+                <td class="col-md-3">{{ flight.TFLDTOPLC }}</td>
+                <td class="col-md-3"><a href="{% url 'edit_flight' flight.TFLDINTRID %}" style="text-decoration: none;">Edit</a></td>
+                <td class="col-md-3"><a href="#" onclick="openModal('{{ flight.TFLDINTRID }}')" style="color: #EE6162;text-decoration: none;">Delete</a></td>
+              </tr>
+            </div>
+            {% empty %}
+            <tr>
+              <td style="color: green;" >No Flights details available</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p>
+          {% if flights %}
+            <a href="{% url 'add_flight_list' trip_id=flights.0.TFLDTRPNAME_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Flight</a>
+          {% endif %}
+        </p>        
+        <div class="modal" tabindex="-1" id="deleteModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this Flight?</p>
+              </div>
+              <div class="modal-footer">
+                <form method="POST" id="deleteForm" style="display: inline;">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+        function openModal(flightId) {
+          const deleteForm = document.getElementById('deleteForm');
+          deleteForm.action = "{% url 'delete_flight' 0 %}".replace("0", flightId);
+          const modal = document.getElementById('deleteModal');
+          modal.style.display = 'block';
+        }
+
+        const modalCloseButtons = document.querySelectorAll('[data-bs-dismiss="modal"]');
+        modalCloseButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            const modal = document.getElementById('deleteModal');
+            modal.style.display = 'none';
+
+          });
+        });
+        </script>  
+
+      </div>
+    </div>
+    
+    <div class="row" id="hotel-section">
+      <div class="col-md-12" style="margin-bottom: 3%;">
+        <h5>Hotel Details</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-md-3">Trip ID</th>
+              <th class="col-md-3">Room Type</th>
+              <th class="col-md-3">Check-in Date</th>
+              <th class="col-md-3">Check-out Date</th>
+              <th class="col-md-3">Edit</th>
+              <th class="col-md-3">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for hotel in hotels %}
+            <div class="row">
+              <tr>
+                <td class="col-md-3">{{ hotel.THDINTRID }}</td>
+                <td class="col-md-3">{{ hotel.THDHTYPE }}</td>
+                <td class="col-md-3">{{ hotel.THDCHKINDTE }}</td>
+                <td class="col-md-3">{{ hotel.THDCHKOTDTE }}</td>
+                <td class="col-md-3"><a href="{% url 'edit_hotel' hotel.THDINTRID %}" style="text-decoration: none;">Edit</a></td>
+                <td class="col-md-3"><a href="#" style="color: #EE6162;text-decoration: none;" onclick="openDeleteModal('{{ hotel.THDINTRID }}')">Delete</a></td>
+              </tr>
+            </div>
+            {% empty %}
+            <tr>
+              <td style="color: green;">No Hotel details available</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p>
+          {% if hotels %}
+            <a href="{% url 'add_hotel_list' trip_id=hotels.0.THDTRHINTRID_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Hotel</a>
+          {% endif %}
+        </p>        
+        <div class="modal" tabindex="-1" id="deleteHotelModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this Hotel?</p>
+              </div>
+              <div class="modal-footer">
+                <form method="POST" id="deleteHotelForm" style="display: inline;">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="closeModal('deleteHotelModal')">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+        function openDeleteModal(hotelId) {
+          const deleteHotelForm = document.getElementById('deleteHotelForm');
+          deleteHotelForm.action = "{% url 'delete_hotel' 0 %}".replace("0", hotelId);
+          const deleteHotelModal = document.getElementById('deleteHotelModal');
+          deleteHotelModal.style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+          const modal = document.getElementById(modalId);
+          modal.style.display = 'none';
+
+        }
+        
+        const modalCloseButtons1 = document.querySelectorAll('[data-bs-dismiss="modal"]');
+        modalCloseButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            const modal = button.closest('.modal');
+            modal.style.display = 'none';
+          });
+        });
+        </script>
+        
+
+      </div>
+    </div>
+    <div class="row" id="car-section">
+      <div class="col-md-12" style="margin-bottom: 3%;">
+        <h5>Car Details</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-md-3">Trip ID</th>
+              <th class="col-md-3">Car Type</th>
+              <th class="col-md-3">Pick-up Date</th>
+              <th class="col-md-3">Drop Date</th>
+              <th class="col-md-3">Edit</th>
+              <th class="col-md-3">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr>
+              <td>1</td>
+              <td>Sedan</td>
+              <td>17/05/2023</td>
+              <td>17/05/2023</td>
+              <td><a href="#">Edit</a></td>
+              <td><a href="#">Delete</a></td>
+            </tr> -->
+            {% for car in cars %}
+            <tr>
+              <td class="col-md-3">{{ car.TCBDINTID }}</td>
+              <td class="col-md-3">{{ car.TCBDCTYP }}</td>
+              <td class="col-md-3">{{ car.TCBDPIKU }}</td>
+              <td class="col-md-3">{{ car.TCBDDROP }}</td>
+              <!-- <td><a href="/flight_edit">Edit</a></td> -->
+              <td class="col-md-3"><a href="{% url 'edit_car' car.TCBDINTID %}" style="text-decoration: none;">Edit</a></td>
+              <td class="col-md-3"><a href="#" style="color: #EE6162;text-decoration: none;" onclick="openCarDeleteModal('{{ car.TCBDINTID }}')">Delete</a></td>
+              <!-- <td><a href="#">Delete</a></td> -->
+            </tr>
+            {% empty %}
+            <tr>
+              <td style="color: green;" >No Car details available</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p>
+          {% if cars %}
+            <a href="{% url 'add_car_list' trip_id=cars.0.TCBDTHID_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Car</a>
+          {% endif %}
+        </p>  
+        <div class="modal" tabindex="-1" id="deleteCarModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this Car?</p>
+              </div>
+              <div class="modal-footer">
+                <form method="POST" id="deleteCarForm" style="display: inline;">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+        function openCarDeleteModal(carId) {
+          const deleteCarForm = document.getElementById('deleteCarForm');
+          deleteCarForm.action = "{% url 'delete_car' 0 %}".replace("0", carId);
+          const deleteCarModal = document.getElementById('deleteCarModal');
+          deleteCarModal.style.display = 'block';
+        }
+        
+        const carModalCloseButtons = document.querySelectorAll('[data-bs-dismiss="modal"]');
+        carModalCloseButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            const deleteCarModal = document.getElementById('deleteCarModal');
+            deleteCarModal.style.display = 'none';
+            document.getElementById('car-section').scrollIntoView({ behavior: 'smooth' });
+          });
+        });
+        </script>
+      </div>
+    </div>
+    <div class="row" id="visa-section">
+      <div class="col-md-12" style="margin-bottom: 3%;">
+        <h5>Visa Details</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-md-3">Trip ID</th>
+              <th class="col-md-3">Visa Type</th>
+              <th class="col-md-3">Travel Date</th>
+              <th class="col-md-3">Visiting Country</th>
+              <th class="col-md-3">Edit</th>
+              <th class="col-md-3">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for visa in visas %}
+            <tr>
+              <td class="col-md-3">{{ visa.TVDINTRID }}</td>
+              <td class="col-md-3">{{ visa.TVDVISTYPE }}</td>
+              <td class="col-md-3">{{ visa.TVDTRAVDTE }}</td>
+              <td class="col-md-3">{{ visa.TVDVISTGCOUN }}</td>
+              <td class="col-md-3"><a href="{% url 'edit_visa' visa.TVDINTRID %}" style="text-decoration: none;">Edit</a></td>
+              <td class="col-md-3"><a href="#" style="color: #EE6162;text-decoration: none;" onclick="openVisaDeleteModal('{{ visa.TVDINTRID }}')">Delete</a></td>
+              <!-- <td><a href="#">Delete</a></td> -->
+            </tr>
+            {% empty %}
+            <tr>
+              <td style="color: green;">No Visa details available</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p>
+          {% if visas %}
+            <a href="{% url 'add_visa_list' trip_id=visas.0.TVDTRAVEL_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Visa</a>
+          {% endif %}
+        </p> 
+        <div class="modal" tabindex="-1" id="deleteVisaModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this Visa?</p>
+              </div>
+              <div class="modal-footer">
+                <form method="POST" id="deleteVisaForm" style="display: inline;">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+        function openVisaDeleteModal(visaId) {
+          const deleteVisaForm = document.getElementById('deleteVisaForm');
+          deleteVisaForm.action = "{% url 'delete_visa' 0 %}".replace("0", visaId);
+          const deleteVisaModal = document.getElementById('deleteVisaModal');
+          deleteVisaModal.style.display = 'block';
+        }
+        
+        const visaModalCloseButtons = document.querySelectorAll('[data-bs-dismiss="modal"]');
+        visaModalCloseButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            const deleteVisaModal = document.getElementById('deleteVisaModal');
+            deleteVisaModal.style.display = 'none';
+            document.getElementById('visa-section').scrollIntoView({ behavior: 'smooth' });
+
+          });
+        });
+        </script>
+
+      </div>
+    </div>
+    <div class="row" id="forex-section">
+      <div class="col-md-12" style="margin-bottom: 3%;">
+        <h5>Forex Details</h5>
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-md-3">Trip ID</th>
+              <th class="col-md-3">Type</th>
+              <th class="col-md-3">Travel Date</th>
+              <th class="col-md-3">Currency</th>
+              <th class="col-md-3">Edit</th>
+              <th class="col-md-3">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for forex in forex %}
+            <tr>
+              <td class="col-md-3">{{ forex.TFDINTRID }}</td>
+              <td class="col-md-3">{{ forex.TFDCSHTYPE }}</td>
+              <td class="col-md-3">{{ forex.TFDTRAVDTE }}</td>
+              <td class="col-md-3">{{ forex.TFDCURR }}</td>
+              <td class="col-md-3"><a href="{% url 'edit_forex' forex.TFDINTRID %}" style="text-decoration: none;">Edit</a></td>
+              <td class="col-md-3"><a href="#" style="color: #EE6162;text-decoration: none;"  onclick="openForexDeleteModal('{{ forex.TFDINTRID }}')">Delete</a></td>
+              <!-- <td><a href="#">Delete</a></td> -->
+            </tr>
+            {% empty %}
+            <tr>
+              <td style="color: green;">No Forex Details available</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p>
+          {% if forex %}
+            <a href="{% url 'add_forex_list' trip_id=forex.0.TFDTRVTID_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Forex</a>
+          {% endif %}
+        </p> 
+        <div class="modal" tabindex="-1" id="deleteForexModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this Forex?</p>
+              </div>
+              <div class="modal-footer">
+                <form method="POST" id="deleteForexForm" style="display: inline;">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+        function openForexDeleteModal(forexId) {
+          const deleteForexForm = document.getElementById('deleteForexForm');
+          deleteForexForm.action = "{% url 'delete_forex' 0 %}".replace("0", forexId);
+          const deleteForexModal = document.getElementById('deleteForexModal');
+          deleteForexModal.style.display = 'block';
+        }
+        
+        const forexModalCloseButtons = document.querySelectorAll('[data-bs-dismiss="modal"]');
+        forexModalCloseButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            const deleteForexModal = document.getElementById('deleteForexModal');
+            deleteForexModal.style.display = 'none';
+            document.getElementById('forex-section').scrollIntoView({ behavior: 'smooth' });
+
+          });
+        });
+        </script>
+
+      </div>
+    </div>
+  </div>
+  <footer class="text-center fixed-bottom" style="height:4%;padding:8px;background-color:#E9ECEF;color:black;border-top:solid white;">
+    <div class="text-center">
+      <small>Copyright  2022 - All rights reserved</small>
+      <a href=http://www.aakit.com target="_blank">AAKIT</a>
+</footer>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
