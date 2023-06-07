@@ -76,8 +76,8 @@ def home(request):
 # def view_trip(request):
 #     return render(request,"view_trip.html")
 
-def view_trip_details(request):
-    return render(request,"view_trip_details.html")
+# def view_trip_details(request):
+#     return render(request,"view_trip_details.html")
 
 def flight_edit(request):
     return render(request,"flight_edit.html")

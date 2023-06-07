@@ -216,8 +216,10 @@
         <p>
           {% if flights %}
             <a href="{% url 'add_flight_list' trip_id=flights.0.TFLDTRPNAME_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Flight</a>
+          {% else %}
+            <a href="{% url 'add_flight_list' trip_id=trip.THINTRID %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Flight</a>
           {% endif %}
-        </p>        
+        </p>       
         <div class="modal" tabindex="-1" id="deleteModal">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -296,6 +298,8 @@
         <p>
           {% if hotels %}
             <a href="{% url 'add_hotel_list' trip_id=hotels.0.THDTRHINTRID_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Hotel</a>
+          {% else %}
+             <a href="{% url 'add_hotel_list' trip_id=trip.THINTRID %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Hotel</a>
           {% endif %}
         </p>        
         <div class="modal" tabindex="-1" id="deleteHotelModal">
@@ -389,6 +393,8 @@
         <p>
           {% if cars %}
             <a href="{% url 'add_car_list' trip_id=cars.0.TCBDTHID_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Car</a>
+          {% else %}
+           <a href="{% url 'add_car_list' trip_id=trip.THINTRID %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Car</a>
           {% endif %}
         </p>  
         <div class="modal" tabindex="-1" id="deleteCarModal">
@@ -465,7 +471,14 @@
         </table>
         <p>
           {% if visas %}
-            <a href="{% url 'add_visa_list' trip_id=visas.0.TVDTRAVEL_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Visa</a>
+            <!-- <a href="{% url 'add_visa_list' trip_id=visas.0.TVDTRAVEL_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Visa</a> -->
+            {% if trip.THTRVTYP == 'International' %}
+            <a href="{% url 'add_visa_list' trip_id=visas.0.TVDTRAVEL_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Forex</a>
+            {% endif %}
+          {% else %}
+            {% if trip.THTRVTYP == 'International' %}
+            <a href="{% url 'add_visa_list' trip_id=trip.THINTRID %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Forex</a>
+            {% endif %}
           {% endif %}
         </p> 
         <div class="modal" tabindex="-1" id="deleteVisaModal">
@@ -544,7 +557,14 @@
         </table>
         <p>
           {% if forex %}
+            <!-- <a href="{% url 'add_forex_list' trip_id=forex.0.TFDTRVTID_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Forex</a> -->
+            {% if trip.THTRVTYP == 'International' %}
             <a href="{% url 'add_forex_list' trip_id=forex.0.TFDTRVTID_id %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Forex</a>
+            {% endif %}
+          {% else %}
+            {% if trip.THTRVTYP == 'International' %}
+            <a href="{% url 'add_forex_list' trip_id=trip.THINTRID %}" style="color: #517F2C;text-decoration: none;font-weight: bold;">Add Forex</a>
+            {% endif %}
           {% endif %}
         </p> 
         <div class="modal" tabindex="-1" id="deleteForexModal">
