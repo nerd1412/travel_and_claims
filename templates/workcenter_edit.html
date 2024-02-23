@@ -139,19 +139,38 @@
                       <div class="card-body">
                        <form method="POST" action="" class="travel_form" novalidate style="padding:5px;">
                          {% csrf_token %}
+
+                         <!-- {{form.as_p}} -->
+
+                        <!-- <div class="row" style="margin-bottom: 10px;">
+                          <div class="col">
+                          <label class="col col-form-label">Work Center ID</label>
+                            <fieldset disabled>
+                              {{form.WCWRKCNTR}}
+                             </fieldset>
+                          </div>
+                        </div> -->
+
+                        <div class="row" style="margin-bottom: 10px;">
+                          <div class="col">
+                              <label class="col col-form-label">Work Center ID</label>
+                              <input type="hidden" name="WCWRKCNTR" value="{{ work.WCWRKCNTR }}">
+                              <input type="text" class="form-control" value="{{ work.WCWRKCNTR }}" readonly>
+                          </div>
+                        </div>
+                      
+
                          <div class="row" style="margin-bottom: 10px;">
-                            <!-- <label class="col col-form-label">Name  :</label> -->
                             <div class="col">
-                            <label class="col col-form-label">Work Centre</label>
-                              {{wform.WCWRKCNTR}}
+                            <label class="col col-form-label">Work Centre Description</label>
+                              {{form.WCWRKCNTRDESP}}
                             </div>
                          </div>
 
                          <div class="row" style="margin-bottom: 10px;">
-                            <!-- <label class="col col-form-label">Name  :</label> -->
                             <div class="col">
-                            <label class="col col-form-label">Work Centre Description</label>
-                              {{wform.WCWRKCNTRDESP}}
+                            <label class="col col-form-label">Status</label>
+                              {{form.status}}
                             </div>
                          </div>
 

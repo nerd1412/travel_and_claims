@@ -27,6 +27,28 @@
       }
       .homelink:hover {background-color:rebeccapurple;}
       
+      *{
+        font-family: 'Poppins', sans-serif;
+      }
+      .homelink:hover {background-color:rebeccapurple;}
+      
+      .ul{
+          margin-left: 90%;
+        }
+        
+        .navbar-center{
+          margin-left: 61%;
+        }
+        @media (max-width: 991px) {
+        .navbar-center {
+          margin-left: -0.2%;
+        }
+      }
+        @media (max-width: 991px) {
+        .ul {
+          margin-left: -0.2%;
+        }
+      }
     </style>
   
         <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
@@ -37,14 +59,15 @@
         <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
           integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
         </script>
+            <script>
+              $(document).ready(function () {      
+                $("#mymodal").modal('show')
+              });
+        </script>
   {% load static %}
 </head>
 {% block content %}
-    <script>
-      $(document).ready(function () {      
-        $("#mymodal").modal('show')
-      });
-    </script>
+
     {% for msg in messages %}
      {% if msg %}
         <div class="modal" tabindex="-1" id="mymodal">
@@ -66,80 +89,146 @@
         </div>
      {% endif %}
     {% endfor %}
-  <!-- <div class="container-fluid">
-    <div class="row">
-        <div class="col-5" style="margin-top:6%">
-            <h4>Add Role</h4>
-            <form action="" method="post">
-                {% csrf_token %}
-                {{form.as_p}}
-            <input class="btn" id="save" style="background-color: rgb(52,49,49);color: white;width: 100%;" type="submit" name="role"
-                  value="Save" >
-            </form>
-        </div>
+
+  <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #E9ECEF;border-bottom:solid white;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">
+        <img src="https://i.ibb.co/TbpT6p1/AAKIT-Logo.png" alt="" width="110" height="45">
+        <!-- <span><i class="fa-solid fa-user-tie"></i></span> -->
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul">
+            
+            <li class="nav-item">
+        <a class="nav-link" href="#" style="color:#2F3233">{{ user.first_name }}</a>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="profile-mini" src=https://contacts.zoho.in/file?t=user&ID=60018445719&fs=thumb width="30" height="30" style="border-radius: 15px;"></a>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Manage my Account</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'mylogout' %}">Logout</a></li>
+              </ul>
+            </li>
+            
+          </ul>
+      </div>
+      
     </div>
-  </div> -->
-<div class="container-fluid" >   
-    <div class="row" style="margin-top:6%; margin-right: 3%; margin-left: 3%;">
+  </nav>
+    <div class="row" style="margin-top:7%; margin-right: 3%; margin-left: 3%;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-right:18%;">
             <div class="container-md" style="margin-left:2px;">
-              <a class="navbar-brand" href="#"><h6 style="font-size: small;"><b>New Entry</b></h6></a>
+              <a class="navbar-brand" href="#"><h6 style="font-size: large;"><b>Add Role</b></h6></a>
+            </div>
+            <div id="add-profile" class="col-md-1" style="margin-right: -85px;">
+              <a href="{% url 'dashboard' %}" style="color: #181819;font-size: larger;"><i class="fa-solid fa-arrow-left"></i></a>
             </div>
         </nav>
     </div>
     <div class="row" style="margin-top:2%; margin-right: 3%; margin-left: 3%;">
 
-
       <form method="POST" action="" class="travel_form" novalidate style="padding:5px;">
       {% csrf_token %}
-      <div class="row mb-4">
-        <label for="grade" class="form-label col-sm-1 col-form-label" style="font-size: small;"><b>User Role Title</b></label>
-
-        <div class="col-sm-3">
-           {{form.URROLTLE}}
-           {{form.URROLTLE.errors}}
-         </div>
-        &nbsp;
-        <label for="Description" class="form-label col-sm-1 col-form-label" style="font-size: small;"><b>User Role Description</b></label>
-      
-        <div class="col-sm-3">
-           {{form.URROLDESP}}
-         </div>
+      <div class="row">
+        <div class="col-md-2" style="margin-top:8px;">
+          <label for="grade"><b>User Role Title : </b></label>
+        </div>
+        <div class="col-md-4">
+          {{form.URROLTLE}}
+          {{form.URROLTLE.errors}}
+        </div>
+        <div class="col-md-2" style="margin-top:8px;">
+          <label for="Description"><b>User Role Description : </b></label>
+        </div>
+        <div class="col-md-4">
+          {{form.URROLDESP}}
+        </div>
+        <div class="col-md-2" style="margin-top:8px;">
+          <label for="Description"><b>Responsible Person For Recruitment : </b></label>
+        </div>
+        <div class="col-md-4" style="margin-top:10px;">
+          {{form.URRESP}}
+        </div>
       </div>
+    <div class="col-md-2" style="margin-top:20px;">
+      <button type="submit" style="width: 109px;" class="btn btn-primary" >Submit</button>
+    </div>
     
-      
-      <button type="submit" style="margin-left: 3%;margin-top:3px; font-size: small;" class="btn btn-primary" >Submit</button>
     </form>
 
     </div>
-</div>
-    <div class="row" style="margin-top:3%; margin-right: 3%; margin-left: 3%;">
+<!-- </div> -->
+    <div class="row" style="margin-top:20px; margin-right: 3%; margin-left: 3%;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-right:18%;">
             <div class="container-md" style="margin-left:2px;">
-              <a class="navbar-brand" href="#"><h6 style="font-size: small;"><b>Data</b></h6></a>
+              <a class="navbar-brand" href="#"><h6 style="font-size: large;"><b>Data</b></h6></a>
             </div>
         </nav>
     </div>   
-    <div class="row admin ">
-        <div class="col-12 ">
-        <h3 style="font-size: small; margin-top:2%; margin-right: 3%; margin-left: 3%;"><b>User Role Table</b></h3>
-        </div>    
-        <div class="col-6">
-            <table class="table table-hover table-bordered" style="font-size: small; margin-top:2%; margin-left: 6%;">
+    <!-- <div class="row admin "> -->
+      <!-- <div class="row">
+        <div class="col-6" style="">
+          <b><p style="font-size: large;margin-top:20px;margin-left:40px;">Search</p></b>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-md-1">
+          <label style="margin-top:25px;margin-left:43px;"><b>Search</b></label>
+        </div>
+        <div class="col-md-3" style="margin-top:20px;margin-left:-10px;">
+          <!-- <input type="text" id="search-input" class="form-control"> -->
+          <form action="search" method="get">
+            <div class="form-group">
+                <div class="input-group">
+                    <br/>
+                    <input class="form-control" type="search" name="name_contains" placeholder="Search" />
+                    <span class="input-group-append">
+                    </span>
+                </div>
+            </div>
+        </form>
+
+        </div>
+      </div>
+           
+        <div class="col-12">
+            <table class="table table-hover table-bordered" style="font-size: small; width: 94%;margin-left: 3%;margin-top: 20px;">
                 <thead style="background-color:#dce9f9;">
                     <tr>
+                        <th>ID</th>
                         <th scope="col">User Role Title</th>
                         <th scope="col">User Role Description</th>
+                        <th scope="col">Responsible Person for Recruitment</th>
+                        <th scope="col">Created User ID</th>
+                        <th scope="col">Created Date/Time</th>
+                        <th scope="col">Modified User ID</th>
+                        <th scope="col">Modified Date/Time</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
                       <tbody>
                         {% for data in page_obj%}
                         <tr>
+                            <td>{{data.URINTRID}}</td>
                             <td>{{data.URROLTLE}}</td>
                             <td>{{data.URROLDESP}}</td>
-                            <td style="color: blue;">
-                              <a href="/role_edit/{{data.URINTRID}}" class="">Edit</a>
+                            <td>{{data.URRESP}}</td>
+                            <td>{{data.URCREABY_id}}</td>
+                            <td>{{data.URCREAON}}</td>
+                            <td>{{data.URMODIBY_id}}</td>
+                            <td>{{data.URMODION}}</td>
+                            <td style="color: blue;width: 50px;padding: 7px;">
+                              <!-- <a href="/role_edit/{{data.URINTRID}}" class="">Edit</a> -->
+                              <a href="/role_edit/{{data.URINTRID}}" class="btn btn-primary btn-sm">Edit</a>
                             </td>                        
                         </tr>
                         {% endfor %}
@@ -149,7 +238,7 @@
             </table> 
             <nav aria-label="Page navigation example">
   
-              <ul class="pagination pagination-md justify-content-center" style="margin-top: 3%;margin-left: 90%;">
+              <ul class="pagination pagination-md justify-content-center" style="margin-top: 20px;">
           
           {% if page_obj.has_previous %}
           
@@ -179,5 +268,5 @@
           
           </nav>
         </div>      
-    </div>
+    <!-- </div> -->
   {% endblock content %}

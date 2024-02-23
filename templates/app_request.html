@@ -1,0 +1,432 @@
+              
+
+    <head>
+        <style>
+              @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+    
+    *{
+      font-family: 'Poppins', sans-serif;
+      font-size: 19px;
+
+    }
+      
+      *{
+      font-family: 'Poppins', sans-serif;
+      }
+      .homelink:hover {background-color:rebeccapurple;}
+      
+      .ul{
+          margin-left: 90%;
+        }
+
+        .form-group {
+    margin-top: 7px;
+}
+        
+        .navbar-center{
+          margin-left: 61%;
+        }
+        @media (max-width: 991px) {
+        .navbar-center {
+          margin-left: -0.2%;
+        }
+      }
+        @media (max-width: 991px) {
+        .ul {
+          margin-left: -0.2%;
+        }
+      }
+          a{
+            text-decoration: none;
+            padding: 15px;
+          }
+          .col-10.ttypes {
+              text-align: center;
+              margin-top: 108px;
+              margin-left: 145px;
+          }
+          input.btn {
+              margin-top: 19px;
+          }
+          select#id_travel_type {
+          display: none;
+      }
+      select#id_PETYSTATUS {
+          display: none;
+      }
+      .card.text-dark.bg-light {
+        margin-top: 15px;
+    }
+    .card.text-dark.bg-light {
+        margin-top: 35px;
+    }
+    a.back {
+        text-decoration: none;
+        margin-left: 90%;
+    }
+    h5.fname {
+        margin-left: 65%;
+        margin-top: 6px;
+    }
+    /* input#id_PETYDR2,#id_PETYDR1,#id_PETYDR3 {
+        width: 88%;
+        margin-left: 26px;
+    } */
+  label.col.col-form-label {
+      margin-left: 10px;
+  }
+
+  .btn:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.dropdown-menu .manage-account,
+    .dropdown-menu .logout {
+        color: black; /* Default text color */
+    }
+
+    /* Border color for dropdown items */
+    .dropdown-menu .manage-account,
+    .dropdown-menu .logout {
+        border-color: #F9CC48; /* Yellow border color */
+    }
+
+    /* Background color on hover */
+    .dropdown-menu .manage-account:hover,
+    .dropdown-menu .logout:hover {
+        background-color: #F9CC48; /* Yellow background color on hover */
+    }
+
+    .form-control:disabled, .form-control[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+    border-radius: 3px;
+}
+
+          </style>
+          <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+          <!-- CSS only -->
+          <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+          <!-- JavaScript Bundle with Popper -->
+          <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+          </script>
+         
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <!-- <script>
+            $(document).ready(function () {
+            $("#itsubmit").click(function () {
+              $("#id_travel_type").val("International");
+            });
+          });
+          </script> -->
+          {% load static %}
+      </head>
+
+      {% for msg in messages %}
+       {% if msg %}
+  <div class="modal" tabindex="-1" id="mymodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Information Message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>{{ msg }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+
+
+  <!-- <div class="container-fluid" style="background-color:#f2f2f2; "> -->
+    <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #E9ECEF;border-bottom:6px solid white;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/home" style="margin-left: -13px;">
+          <img src="https://i.ibb.co/TbpT6p1/AAKIT-Logo.png" alt="" width="150" height="55" >
+          <!-- <span><i class="fa-solid fa-user-tie"></i></span> -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 2%;">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul">
+              
+              <li class="nav-item2">
+                  <a class="nav-link" href="#" style="color:#2F3233">{{ user.first_name }}</a>
+              </li>
+              
+              <li class="nav-item2 dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img class="profile-mini" src="https://contacts.zoho.in/file?t=user&ID=60018445719&fs=thumb" width="30" height="30" style="border-radius: 15px;">
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item manage-account" href="#">Manage my Account</a></li>
+                      <!-- <li><hr class="dropdown-divider"></li> -->
+                      <li><a class="dropdown-item logout" href="{% url 'mylogout' %}">Logout</a></li>
+                  </ul>
+              </li>
+              
+          </ul>
+        </div>
+      
+        
+      </div>
+    </nav>
+
+
+      <div class="container-fluid"> 
+        <!-- <div class="row"> -->
+          
+          <div class="row">
+           
+              <div class="col-6" style="margin-top: 5%;width: 99%;margin-bottom: 4%;margin-left: 7px;">
+                
+                  <div class="card text-dark bg-light" style="border-radius: 5px;">
+                      <div class="card-header" style="background-color:#dce9f9">
+                        <h3><b>Travel Approval Form</b></h3>
+                      </div>
+                      <div class="card-body" style="background-color: white;">
+
+                        <form method="POST" action="" class="travel_form" novalidate style="padding:5px;">
+                          {% csrf_token %}
+
+                          <h4>Header Details</h4>
+                          
+                          <div class="row" style="margin-bottom: 10px;">
+                              <div class="col">
+                                  <label class="col col-form-label">Travel Request ID</label>
+                                  <input type="text" class="form-control" value="{{ travel_request.THINTRID }}" readonly>
+                              </div>
+                              <div class="col">
+                                <label class="col col-form-label">Travel Type</label>
+                                <input type="hidden" name="{{ form.THTRVTYP.name }}" value="{{ form.THTRVTYP.value }}">
+                                <input type="text" class="form-control" value="{{ form.THTRVTYP.value }}" readonly>
+                            </div>
+                            <div class="col">
+                              <label class="col col-form-label">Trip Name</label>
+                              <input type="text" class="form-control" value="{{ travel_request.THTRPNAME }}" readonly>
+                            </div>
+                            <div class="col">
+                              <label class="col col-form-label">Project</label>
+                              <input type="text" class="form-control" value="{{ project_name }}" readonly>
+                          </div>
+
+                            
+                          </div>
+
+                          <h4>Flight Details</h4>
+
+                          <!-- Displaying Flight Details -->
+                          {% if flight_details %}
+                              {% for flight_detail in flight_details %}
+                              <div class="row" style="margin-bottom: 10px;">
+                                  <div class="col">
+                                      <label class="col col-form-label">Flight Preference</label>
+                                      <input type="text" class="form-control" value="{{ flight_detail.TFLDPREF }}" readonly>
+                                    <!-- <p>{{ flight_detail.TFLDPREF }}</p> -->
+
+                                  </div>
+                                  <div class="col">
+                                      <label class="col col-form-label">Preferred Airline</label>
+                                      <input type="text" class="form-control" value="{{ flight_detail.TFLDPREFAIR }}" readonly>
+                                  </div>
+                                  <div class="col">
+                                      <label class="col col-form-label">Departure Date</label>
+                                      <input type="text" class="form-control" value="{{ flight_detail.TFLDDTEOFTRV }}" readonly>
+                                  </div>
+                                  <div class="col">
+                                      <label class="col col-form-label">From City</label>
+                                      <input type="text" class="form-control" value="{{ flight_detail.TFLDFRMPLC }}" readonly>
+                                  </div>
+                                  <div class="col">
+                                      <label class="col col-form-label">To City</label>
+                                      <input type="text" class="form-control" value="{{ flight_detail.TFLDTOPLC }}" readonly>
+                                  </div>
+                              </div>
+                              {% endfor %}
+                          {% else %}
+                              <p style="color: green;">No flight details available.</p>
+                          {% endif %}
+                          
+
+                          <h4>Hotel Deatils</h4>
+
+
+                      {% if hotel_details %}
+                          {% for hotel_detail in hotel_details %}
+                          <div class="row" style="margin-bottom: 10px;">
+                              <div class="col">
+                                  <label class="col col-form-label">Room Type</label>
+                                  <input type="text" class="form-control" value="{{ hotel_detail.THDHTYPE }}" readonly>
+                              </div>
+                              <div class="col">
+                                <label class="col col-form-label">Prefered Hotel</label>
+                                  <input type="text" class="form-control" value="{{ hotel_detail.THDPREFHOTL }}" readonly>
+                              </div>
+                              <div class="col">
+                                <label class="col col-form-label">City</label>
+                                  <input type="text" class="form-control" value="{{ hotel_detail.THDCITY }}" readonly>
+                              </div>
+                              <div class="col">
+                                <label class="col col-form-label">Check-in</label>
+                                  <input type="text" class="form-control" value="{{ hotel_detail.THDCHKINDTE }}" readonly>
+                              </div>
+                              <div class="col">
+                                <label class="col col-form-label">Check-out</label>
+                                  <input type="text" class="form-control" value="{{ hotel_detail.THDCHKOTDTE }}" readonly>
+                              </div>
+                          </div>
+                          {% endfor %}
+                      {% else %}
+                       <p style="color: green;">No hotel details available.</p>
+                      {% endif %}
+
+
+                          <h4>Car Booking</h4>
+
+                          {% if car_booking_details %}
+                            {% for car_booking in car_booking_details %}
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col">
+                                    <label class="col col-form-label">Car Type</label>
+                                    <input type="text" class="form-control" value="{{ car_booking.TCBDCTYP }}" readonly>
+                                </div>
+                                <div class="col">
+                                  <label class="col col-form-label">From Location</label>
+                                    <input type="text" class="form-control" value="{{ car_booking.TCBDFRLOC }}" readonly>
+                                </div>
+                                <div class="col">
+                                  <label class="col col-form-label">To Location</label>
+                                    <input type="text" class="form-control" value="{{ car_booking.TCBDTOLOC }}" readonly>
+                                </div>
+                                <div class="col">
+                                  <label class="col col-form-label">Pickup Date</label>
+                                    <input type="text" class="form-control" value="{{ car_booking.TCBDPIKU }}" readonly>
+                                </div>
+                                <div class="col">
+                                  <label class="col col-form-label">Drop Date</label>
+                                    <input type="text" class="form-control" value="{{ car_booking.TCBDDROP }}" readonly>
+                                </div>
+                            </div>
+                            {% endfor %}
+                          {% else %}
+                            <p style="color: green;">No car details available.</p>
+                          {% endif %}
+
+                          
+
+                          <h4>Visa Deatils</h4>
+
+                          {% if visa_details %}
+                            {% for visa_detail in visa_details %}
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col">
+                                    <label class="col col-form-label">Visa Type</label>
+                                    <input type="text" class="form-control" value="{{ visa_detail.TVDVISTYPE }}" readonly>
+                                </div>
+                                <div class="col">
+                                  <label class="col col-form-label">Visiting Country</label>
+                                    <input type="text" class="form-control" value="{{ visa_detail.TVDVISTGCOUN }}" readonly>
+                                </div>
+                                <div class="col">
+                                  <label class="col col-form-label">Visa Fees</label>
+                                    <input type="text" class="form-control" value="{{ visa_detail.TVDVSAFES }}" readonly>
+                                </div>
+                                <div class="col">
+                                  <label class="col col-form-label">Remarks</label>
+                                    <input type="text" class="form-control" value="{{ visa_detail.TVDREMK }}" readonly>
+                                </div>
+                            </div>
+                            {% endfor %}
+                          {% else %}
+                            <p style="color: green;">No visa details available.</p>
+                          {% endif %}
+
+                          
+
+                          <h4>Forex</h4>
+
+                          {% if forex_details %}
+                            {% for forex_detail in forex_details %}
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col">
+                                    <label class="col col-form-label">Type</label>
+                                    <input type="text" class="form-control" value="{{ forex_detail.TFDCSHTYPE }}" readonly>
+                                    <!-- <p>{{ forex_detail.TFDCSHTYPE }}</p> -->
+                                </div>
+                                <div class="col">
+                                  <label class="col col-form-label">Amount</label>
+                                    <input type="text" class="form-control" value="{{ forex_detail.TFDAMNT }}" readonly>
+                                </div>
+                                <div class="col">
+                                  <label class="col col-form-label">Currency</label>
+                                    <input type="text" class="form-control" value="{{ forex_detail.TFDCURR }}" readonly>
+                                </div>
+                                <div class="col">
+                                  <label class="col col-form-label">Remarks</label>
+                                    <input type="text" class="form-control" value="{{ forex_detail.TFDREMARK }}" readonly>
+                                </div>
+                            </div>
+                            {% endfor %}
+                          {% else %}
+                          <p style="color: green;">No forex details available.</p>
+                          {% endif %}
+
+                          
+
+
+
+
+                      
+                          <!-- Similar blocks for displaying Car Booking, Hotel Details, Forex Details, Visa Details -->
+                      
+                          <!-- Hidden fields for THTASTATUS and THSTUSTYP -->
+                          <input type="hidden" name="{{ form.THTASTATUS.name }}" value="{{ form.THTASTATUS.value }}">
+                          <input type="hidden" name="{{ form.THSTUSTYP.name }}" value="{{ form.THSTUSTYP.value }}">
+                          <input type="hidden" name="{{ form.THPROJ.name }}" value="{{ form.THPROJ.value }}">
+                          <input type="hidden" name="{{ form.THPURPOSE.name }}" value="{{ form.THPURPOSE.value }}">
+                          <input type="hidden" name="{{ form.THTRPNAME.name }}" value="{{ form.THTRPNAME.value }}">
+                      
+                          <div class="row" style="margin-bottom: 10px; display: none;">
+                              <div class="col">
+                                  <label class="col col-form-label">Status</label>
+                                  {{ form.THTASTATUS.value }}
+                              </div>
+                          </div>
+                      
+                          <!-- Similar blocks for Travel Status Type, Project ID, Purpose, Trip Name -->
+                      
+                          <input class="btn" id="itsubmit" style="background-color: #59C37E;color: white;" type="submit" name="approve" value="Approve">
+                          <button class="btn" style="background-color: #EA4335;color: white;margin-top: 19px;margin-left: 33px;width:115px" type="submit" name="reject">Reject</button>
+                      </form>
+                      
+
+                      
+
+                      </div>
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+  <!-- </div> -->
+  
+
+  <footer class="text-center fixed-bottom" style="height:4%;padding:8px;background-color:#E9ECEF;color:black;border-top:6px solid white;">
+    <div class="text-center">
+      <small>Copyright  2022 - All rights reserved</small>
+      <a href=http://www.aakit.com target="_blank">AAKIT</a>
+  </footer>
+      

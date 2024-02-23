@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+                @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+*{
+font-family: 'Poppins', sans-serif;
+}
+    /* .col-12.tform {
+        margin-top: 61px;
+        margin-bottom: 10%;
+    } */
+    /* .col-10.ttypes {
+        margin-top: 108px;
+    } */
+    a{
+      text-decoration: none;
+      padding: 15px;
+    }
+    .col-10.ttypes {
+        text-align: center;
+        margin-top: 108px;
+        margin-left: 145px;
+    }
+    input.btn {
+        margin-top: 19px;
+    }
+    
+.card.text-dark.bg-light {
+  margin-top: 15px;
+}
+.card.text-dark.bg-light {
+  margin-top: 35px;
+}
+a.back {
+  text-decoration: none;
+  margin-left: 90%;
+}
+h5.fname {
+  margin-left: 65%;
+  margin-top: 6px;
+}
+h4{
+margin-left: 15px;
+}
+/* input#id_PETYDR2,#id_PETYDR1,#id_PETYDR3 {
+  width: 88%;
+  margin-left: 26px;
+} */
+label.col.col-form-label {
+margin-left: 10px;
+}
+#itsubmit {
+margin-left: 12px;
+}
+
+*{
+      font-family: 'Poppins', sans-serif;
+    }
+    .homelink:hover {background-color:rebeccapurple;}
+    
+    .ul{
+        margin-left: 90%;
+      }
+      
+      .navbar-center{
+        margin-left: 61%;
+      }
+      @media (max-width: 991px) {
+      .navbar-center {
+        margin-left: -0.2%;
+      }
+    }
+      @media (max-width: 991px) {
+      .ul {
+        margin-left: -0.2%;
+      }
+    }
+
+    .tile-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tile-col {
+    flex: 0 0 16.66%; /* 6 columns in a row */
+    max-width: 15.66%;
+    padding: 6px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 3px;
+    /* margin-left: 33px; */
+    /* border: 1px solid black; */
+    background-color: #E9ECEF;
+  }
+    </style>
+    <!-- ... (head content) ... -->
+    <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- CSS only -->
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+</head>
+<nav class="navbar fixed-top navbar-expand-lg" style="background-color: #E9ECEF;border-bottom:solid white;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">
+        <img src="https://i.ibb.co/TbpT6p1/AAKIT-Logo.png" alt="" width="110" height="45">
+        <!-- <span><i class="fa-solid fa-user-tie"></i></span> -->
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul">
+            
+            <li class="nav-item">
+        <a class="nav-link" href="#" style="color:#2F3233">{{ user.first_name }}</a>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img class="profile-mini" src=https://contacts.zoho.in/file?t=user&ID=60018445719&fs=thumb width="30" height="30" style="border-radius: 15px;"></a>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Manage my Account</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'mylogout' %}">Logout</a></li>
+              </ul>
+            </li>
+            
+          </ul>
+      </div>
+      
+    </div>
+    </nav>
+<body>
+    <div class="row" style="margin-top:7%; margin-right: 3%; margin-left: 3%;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-right:18%;">
+            <div class="container-md" style="margin-left:2px;">
+              <a class="navbar-brand" href="#"><h6 style="font-size: large;"><b>Help Documents</b></h6></a>
+            </div>
+            <div class="col-md-1" style="margin-right: -72px;">
+              <a href="{% url 'dashboard' %}" style="color: #181819;font-size: larger;">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+              </a>
+            </div>
+        </nav>
+    </div>
+    <table class="table table-hover table-bordered" style="font-size: small; width: 94%;margin-left: 3%;margin-top: 20px;">
+        <thead style="background-color:#dce9f9;">
+            <tr>
+                <th>Title</th>
+                <th scope="col" style="margin-left: 30px;width: 200px;padding-left: 23px;">Action</th>
+              </tr>
+            </thead>
+              <tbody>
+                {% for document in documents %}
+                <tr>
+                    <td>{{ document.title }}</td>
+                    <td>
+                        <a href="/media/{{ document.file_name }}" style="text-decoration: none;" target="_blank">Download Document</a>
+                    </td>
+                </tr>
+                {% endfor %}
+      </tbody>
+      
+    </table> 
+    <footer class="text-center fixed-bottom" style="height:4%;padding:8px;background-color:#E9ECEF;color:black;border-top:solid white;">
+        <div class="text-center">
+          <small>Copyright  2022 - All rights reserved</small>
+          <a href=http://www.aakit.com target="_blank">AAKIT</a>
+      </footer>
+</body>
+</html>

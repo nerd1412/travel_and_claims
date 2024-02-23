@@ -1,21 +1,356 @@
+
 {% extends "base.html" %}
-<html lang="en">
 <head>
     <title>Employee</title>
+    <!-- CSS only -->
+  
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="shortcut icon" href=https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/images/favicon.ico>
+    <link rel="mask-icon" href=https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/images/favicon-7d3a75df3c13715d4a8002008a877d0a.svg>
+    <link rel="stylesheet" href=https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/styles/vendor-a3c3ac7386caf0cb9c58905c1b8e6d04.css onerror="notifyOnFailure('https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/styles/vendor-a3c3ac7386caf0cb9c58905c1b8e6d04.css')">
+    <link rel="stylesheet" href=https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/styles/zexpense-880b90685c29529111773fdde7070a63.css onerror="notifyOnFailure('https://d10f050hr6w2l2.cloudfront.net/zexpense/assets/styles/zexpense-880b90685c29529111773fdde7070a63.css')">
+    <link rel="stylesheet" href=https://css.zohocdn.com/ichat/css/Dec_12_2022_1_wmsbar.css>
+    <!-- our project just needs Font Awesome Solid + Brands -->
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+    </script>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+    
+      *{
+        font-family: 'Poppins', sans-serif;
+      }
+      .homelink:hover {background-color:rebeccapurple;}
+      
+    </style>
+        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+        <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
+        <!-- CSS only -->
+        <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js
+          integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+        </script>
+            <script>
+              $(document).ready(function () {      
+                $("#mymodal").modal('show')
+              });
+
+              $(document).ready(function() {
+                    var today = new Date().toISOString().split('T')[0];
+                    $('input[type="date"]').attr('min', today);
+                });
+        </script>
+
+        
+  {% load static %}
 </head>
-<body>
-{% block content %}
-<div class="container-fluid">
-    <div class="row" style="padding-top:6%">
-        <div class="col">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{form}}
-                <input class="btn btn-success" type="submit" value="Save">
-            </form>
+<!-- {% block content %} -->
+
+    {% for msg in messages %}
+     {% if msg %}
+        <div class="modal" tabindex="-1" id="mymodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Information Message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>{{ msg }}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                
+            </div>
+            </div>
         </div>
+        </div>
+     {% endif %}
+    {% endfor %}
+    <div class="row" style="margin-top:7%; margin-right: 3%; margin-left: 3%;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-right:18%;">
+            <div class="container-md" style="margin-left:2px;">
+              <a class="navbar-brand" href="#"><h6 style="font-size: large;"><b>Add Employee</b></h6></a>
+            </div>
+            <div class="col-md-1" style="margin-right: -85px;">
+              <a href="{% url 'dashboard' %}" style="color: #181819;font-size: larger;"><i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+        </nav>
     </div>
-</div>
-{% endblock content %}
-</body>
-</html>
+    <div class="row" style="margin-top:2%; margin-right: 3%; margin-left: 3%;">
+
+      
+
+      <form method="POST" action="" class="travel_form" novalidate style="padding:5px;">
+        {% csrf_token %}
+        <div class="row">
+          {% for row in form %}
+            {% if row.id_for_label != 'id_password1' and row.id_for_label != 'id_password2' %}
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label for="{{ row.id_for_label }}"><b>{{ row.label }} :</b></label>
+                  <br /><br />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  {{ row }}
+                  {{ row.errors }} <!-- Display field-specific errors -->
+                </div>
+              </div>
+              <br />
+            {% else %}
+              <div class="col-md-2">
+                <div class="form-group">
+                  {{ row }}
+                  {{ row.errors }} <!-- Display field-specific errors -->
+                </div>
+              </div>
+              <br />
+            {% endif %}
+          {% endfor %}
+        </div>
+            </div>
+      <div class="col-md-2" style="margin-top:10px;">
+        <button type="submit" style="width: 200px;margin-left:48px;" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+
+
+
+    </div>
+<!-- </div> -->
+    <div class="row" style="margin-top:20px; margin-right: 3%; margin-left: 3%;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-right:18%;">
+            <div class="container-md" style="margin-left:2px;">
+              <a class="navbar-brand" href="#"><h6 style="font-size: large;"><b>Data</b></h6></a>
+            </div>
+        </nav>
+    </div>   
+    <!-- <div class="row admin "> -->
+      <!-- <div class="row">
+        <div class="col-6" style="">
+          <b><p style="font-size: large;margin-top:20px;margin-left:40px;">Search</p></b>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <!-- <div class="col-md-1">
+          <label style="margin-top:22px;margin-left:43px;"><b>Search</b></label>
+        </div> -->
+        <div class="col-md-1">
+          <label style="margin-top:25px;margin-left:43px;"><b>Search</b></label>
+        </div>
+        <div class="col-md-3" style="margin-top:20px;margin-left:-10px;">
+          <!-- <input type="text" id="search-input" class="form-control"> -->
+          <form action="{% url 'add_profile' %}" method="get">
+            <div class="form-group">
+                <div class="input-group">
+                    <br/>
+                    <input class="form-control" type="search" name="name_contains" placeholder="Search" />
+                    <span class="input-group-append">
+                    </span>
+                </div>
+            </div>
+        </form>
+        </div>
+      </div>
+           
+        <div class="col-12">
+            <div style="overflow-x: auto;width: 100%;">
+              <table id='datatable' class="table table-hover table-bordered" style="font-size: small; width: 94%;margin-left: 3%;margin-top: 20px;color: black;">
+                  <thead style="background-color:#dce9f9;">
+                      <tr>
+                          <th>Employee ID</th>
+                          <th scope="col">Employee Name</th>
+                          <th scope="col">Employee Email</th>
+                          <th scope="col">Employee Type</th>
+                          <th scope="col">Employee Role</th>
+                          <th scope="col">Base Cost Center</th>
+                          <th scope="col">Authentication</th>
+                          <th scope="col">Birthday</th>
+                          <th scope="col">Efforts</th>
+                          <th scope="col">Joining Date</th>
+                          <th scope="col">Department</th>
+                          <th scope="col">Created User ID</th>
+                          <th scope="col">Created Date/Time</th>
+                          <th scope="col">Modified User ID</th>
+                          <th scope="col">Modified Date/Time</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                          {% for data in page_obj%}
+                          <tr>
+                              <td>{{data.emp_id}}</td>
+                              <td>{{data.first_name}}</td>
+                              <td>{{data.email}}</td>
+                              <td>{{data.emp_type}}</td>
+                              <td>{{data.role}}</td>
+                              <td>{{data.cost_center}}</td>
+                              <td>{{data.auth}}</td>
+                              <td>{{data.dob}}</td>
+                              <td>{{data.efforts}}</td>
+                              <td>{{data.joining_date}}</td>
+                              <td>{{data.department}}</td>
+                              <td>{{data.emp_created_by_id}}</td>
+                              <td>{{data.emp_created_on}}</td>
+                              <td>{{data.emp_mod_by_id}}</td>
+                              <td>{{data.emp_mod_on}}</td>
+                              <td style="color: blue;width: 50px;padding: 7px;">
+                                <a href="/employee_edit/{{data.id}}" class="btn btn-primary btn-sm">Edit</a>
+                              </td>
+                          </tr>
+                          {% endfor %}
+
+                </tbody>
+                
+              </table> 
+            </div>
+            <nav aria-label="Page navigation example">
+  
+              <ul class="pagination pagination-md justify-content-center" style="margin-top: 20px;">
+          
+          {% if page_obj.has_previous %}
+          
+              <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+          
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+          
+          {% endif %}
+          
+          {% for i in nums %}
+          
+              <li class="page-item">
+          
+                  <a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+          
+              </li>
+          {% endfor %}
+          {% if page_obj.has_next %}
+          
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next </a></li>
+          
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a></li>
+          
+          {% endif %}
+          
+              </ul>
+          
+          </nav>
+        </div>  
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+        <script>
+          $('#datatable').removeAttr('width').DataTable({
+              "scrollX": true,
+              scrollCollapse: true,
+              fixedColumns: {
+                  leftColumns: 4
+              }
+          });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const formsetPrefix = '{{ multiprofile_formset.prefix }}';
+  const formsetTotalFormsString = '{{ multiprofile_formset.total_form_count }}';
+  const formsetTotalForms = parseInt(formsetTotalFormsString);
+  const formsetManagementForm = document.querySelector('input[name="multiprofile-TOTAL_FORMS"]');
+  const fieldContainer = document.querySelector('#formset-container');
+
+  let fieldCount = formsetTotalForms;
+  console.log(fieldCount)
+  console.log(formsetTotalForms)
+
+
+  const addFieldLink = document.querySelector('#add-profile');
+  addFieldLink.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    // Create the new field for THDPROGSTA
+    const progressInput = createSelectProfile(`${fieldCount}-THDPROGSTA`, fieldCount);
+    // progressInput.style.marginLeft = '500px';
+    progressInput.style.marginBottom = '15px';
+
+    // Append the progressInput to the fieldContainer
+    fieldContainer.appendChild(progressInput);
+
+    // Update the management form with the new total form count
+    formsetManagementForm.setAttribute('value', `${fieldCount + 1}`);
+
+    fieldCount++;
+  });
+});
+
+function createSelectProfile(name, count) {
+  const formsetPrefix = '{{ multiprofile_formset.prefix }}';
+  const fullName = `${formsetPrefix}-${name}`;
+
+  const divElement = document.createElement('div');
+  divElement.classList.add('row');
+
+  const labelColElement = document.createElement('div');
+  labelColElement.classList.add('col-2');
+  const labelElement = document.createElement('label');
+  labelElement.classList.add('form-label');
+  labelElement.textContent = `Level ${count + 2}:`;
+  labelColElement.appendChild(labelElement);
+  divElement.appendChild(labelColElement);
+
+  const selectColElement = document.createElement('div');
+  selectColElement.classList.add('col-3');
+  const selectElement = document.createElement('select');
+  selectElement.setAttribute('name', fullName);
+  selectElement.classList.add('form-select');
+  selectColElement.appendChild(selectElement);
+  divElement.appendChild(selectColElement);
+
+  const minusColElement = document.createElement('div');
+  minusColElement.classList.add('col-1');
+  const minusIcon = document.createElement('i');
+  minusIcon.style.marginTop = '5px';
+
+  minusIcon.classList.add('fa-solid', 'fa-minus', 'fa-lg', 'remove-form');
+  // minusIcon.addEventListener('click', () => {
+  //   divElement.parentNode.removeChild(divElement);
+  // });
+    $(document).on("click", ".remove-form", function () {
+    $(this).closest(".row").remove();
+    });
+  minusColElement.appendChild(minusIcon);
+  divElement.appendChild(minusColElement);
+
+  fetch('/get_user_choices/')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(item => {
+        const option = document.createElement('option');
+        option.setAttribute('value', item.value);
+        option.textContent = item.label;
+        selectElement.appendChild(option);
+      });
+    })
+    .catch(error => {
+      console.log('Error:', error);
+    });
+
+  return divElement;
+}
+
+        </script>
+        
+    <!-- </div> -->
+  <!-- {% endblock content %} -->

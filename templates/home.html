@@ -23,12 +23,47 @@
     
       *{
         font-family: 'Poppins', sans-serif;
+      font-size: 19px;
+
       }
-      .homelink:hover {background-color:rebeccapurple;}
+
+      .nav-item1 a:hover {
+        color: #F9CC48 !important;
+    }
+
+ 
+      .nav-item a {
+        color: #2F3233;
+        transition: color 0.3s ease; /* Add transition for color change */
+        position: relative; /* Add relative positioning to the anchor */
+    }
+
+    .nav-item a:hover {
+        color: #F9CC48 !important;
+    }
+
+    .nav-item a::after {
+        content: '';
+        position: absolute;
+        bottom: -3px; /* Adjust this value to control the distance of the underline from the text */
+        left: 0;
+        width: 0%;
+        height: 2px; /* Adjust this value to control the thickness of the underline */
+        background-color: #F9CC48; /* Set underline color */
+        transition: width 0.3s ease; /* Add transition for underline animation */
+    }
+
+    .nav-item a:hover::after {
+        width: 100%; /* Expand the underline to cover the width of the text on hover */
+    }
       
       .ul{
           margin-left: 90%;
         }
+
+        li {
+    width: 115%;
+}
         
         .navbar-center{
           margin-left: 61%;
@@ -43,6 +78,106 @@
           margin-left: -0.2%;
         }
       }
+
+      .row {
+          flex-wrap: nowrap;
+      }
+
+      /* Styles for dropdown items */
+    .dropdown-menu .manage-account,
+    .dropdown-menu .logout {
+        color: black; /* Default text color */
+    }
+
+    /* Border color for dropdown items */
+    .dropdown-menu .manage-account,
+    .dropdown-menu .logout {
+        border-color: #F9CC48; /* Yellow border color */
+    }
+
+    /* Background color on hover */
+    .dropdown-menu .manage-account:hover,
+    .dropdown-menu .logout:hover {
+        background-color: #F9CC48; /* Yellow background color on hover */
+    }
+
+
+    /*cards animation*/
+    .pt {
+      position: relative;
+      transition: transform 0.3s ease; 
+    }
+
+    /* .pt:hover {
+      transform: scale(1.1); 
+    } */
+
+    /* .border-animation {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    } */
+
+    /* @keyframes borderAnimation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    } */
+
+
+
+    .notification-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Adjust as needed */
+}
+
+
+
+    .notification-icon-container .badge {
+    position: absolute;
+    top: 11px;
+    right: -1px;
+    background-color: #F9CC48;
+    color: black;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: small;
+    width: 16px;
+}
+
+    svg#notification-icon {
+    height: 23px;
+    margin-top: 7px;
+}
+
+
+
+
+/* messages */
+
+#notification-card {
+    position: absolute; /* Position the card absolutely */
+    top: 90px; /* Adjust the top position as needed */
+    right: 70px; /* Align the card to the right */
+    z-index: 999; /* Ensure the card is above other elements */
+}
+
+
+
+.hidden {
+      display: none !important;
+    }
+
+
+
     </style>
   
         <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script>
@@ -57,9 +192,167 @@
 </head>
   <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
     <script>
+      
       $(document).ready(function () {      
         $("#mymodal").modal('show')
       });
+
+
+
+// Function to fetch the unread notification count from the server
+// function getUnreadNotificationCount() {
+//     $.ajax({
+//         url: '/get_unread_notification_count/', // URL to the view function
+//         type: 'GET',
+//         success: function(response) {
+//             // Update notification count
+//             $('#notification-count').text(response.unread_count); 
+            
+//             // Display notification messages if available
+//             var notificationMessages = response.notification_messages;
+//             if (notificationMessages && notificationMessages.length > 0) {
+//                 // Clear existing notification messages
+//                 $('#notification-list').empty();
+//                 // Append new notification messages
+//                 notificationMessages.forEach(function(message) {
+//                     $('#notification-list').append('<li class="list-group-item">' + message + '</li>');
+//                 });
+//                 // Show the notification card
+//                 $('#notification-card').show();
+//             }
+//         },
+//         error: function(xhr, errmsg, err) {
+//             console.log(xhr.status + ": " + xhr.responseText); // Log any errors to the console
+//         }
+//     });
+// }
+
+// // Event listener for clicking the notification link
+// $('#notification-link').click(function(event) {
+//     console.log("Notification link clicked"); // Debug statement
+//     event.preventDefault(); // Prevent default link behavior
+//     getUnreadNotificationCount(); // Fetch and display notifications
+// });
+
+
+// // Function to update the notification count periodically
+// function updateNotificationCount() {
+//     // Fetch and update the notification count
+//     getUnreadNotificationCount();
+// }
+
+// Fetch and update the notification count on page load
+$(document).ready(function() {
+    updateNotificationCount(); // Initial fetch
+    // Update the notification count every 1 minute (adjust interval as needed)
+    setInterval(updateNotificationCount, 1000); // 60000 milliseconds = 1 minute
+});
+
+// // document.addEventListener("DOMContentLoaded", function() {
+// //     var notificationCard = document.getElementById("notification-card");
+
+// //     // Toggle notification card visibility on button click
+// //     document.getElementById("toggle-notification-btn").addEventListener("click", function() {
+// //       notificationCard.classList.toggle("hidden");
+// //     });
+// //   });
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     var notificationCard = document.getElementById("notification-card");
+
+//     // Toggle notification card visibility on button click
+//     document.getElementById("toggle-notification-btn").addEventListener("click", function(event) {
+//         notificationCard.classList.toggle("hidden");
+//         event.stopPropagation(); // Prevent event from propagating up to the document level
+//     });
+
+//     // Hide notification card when clicking outside of it
+//     document.addEventListener("click", function(event) {
+//         // Check if the clicked target is outside the notification card and toggle button
+//         if (!notificationCard.contains(event.target) && event.target.id !== 'toggle-notification-btn') {
+//             notificationCard.classList.add("hidden");
+//         }
+//     });
+// });
+
+
+
+
+
+  //notification read
+  document.addEventListener("DOMContentLoaded", function() {
+    var notificationCard = document.getElementById("notification-card");
+
+    // Function to mark notifications as read
+    function markNotificationsAsRead() {
+        $.ajax({
+            url: '/mark_notifications_as_read/',  // URL to the view function
+            type: 'POST',
+            success: function(response) {
+                console.log("Notifications marked as read successfully"); // Debug statement
+            },
+            error: function(xhr, errmsg, err) {
+                console.log(xhr.status + ": " + xhr.responseText); // Log any errors to the console
+            }
+        });
+    }
+
+    // Function to fetch unread notification count and display notification card
+    function fetchAndDisplayNotifications() {
+        $.ajax({
+            url: '/get_unread_notification_count/', // URL to the view function
+            type: 'GET',
+            success: function(response) {
+                // Update notification count
+                $('#notification-count').text(response.unread_count); 
+                
+                // Display notification messages if available
+                var notificationMessages = response.notification_messages;
+                if (notificationMessages && notificationMessages.length > 0) {
+                    // Clear existing notification messages
+                    $('#notification-list').empty();
+                    // Append new notification messages
+                    notificationMessages.forEach(function(message) {
+                        $('#notification-list').append('<li class="list-group-item">' + message + '</li>');
+                    });
+                    // Show the notification card
+                    notificationCard.classList.remove("hidden");
+                    // Mark notifications as read
+                    markNotificationsAsRead();
+                }
+            },
+            error: function(xhr, errmsg, err) {
+                console.log(xhr.status + ": " + xhr.responseText); // Log any errors to the console
+            }
+        });
+    }
+
+    // Toggle notification card visibility on button click
+    document.getElementById("toggle-notification-btn").addEventListener("click", function(event) {
+        notificationCard.classList.toggle("hidden");
+        // Mark notifications as read when notification card is displayed
+        if (!notificationCard.classList.contains("hidden")) {
+            markNotificationsAsRead();
+        }
+        event.stopPropagation(); // Prevent event from propagating up to the document level
+    });
+
+    // Hide notification card when clicking outside of it
+    document.addEventListener("click", function(event) {
+        // Check if the clicked target is outside the notification card and toggle button
+        if (!notificationCard.contains(event.target) && event.target.id !== 'toggle-notification-btn') {
+            notificationCard.classList.add("hidden");
+        }
+    });
+
+    // Fetch and display notifications on page load
+    fetchAndDisplayNotifications();
+});
+
+  
+  
+  //end
+
     </script>
     {% for msg in messages %}
      {% if msg %}
@@ -82,39 +375,80 @@
   </div>
   {% endif %}
   {% endfor %}
-  <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #E9ECEF;border-bottom:solid white;">
+  <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #E9ECEF;border-bottom:6px solid white;">  
     <div class="container-fluid">
-      <a class="navbar-brand" href="/home">
-        <img src="https://i.ibb.co/TbpT6p1/AAKIT-Logo.png" alt="" width="110" height="45">
-        <!-- <span><i class="fa-solid fa-user-tie"></i></span> -->
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <a class="navbar-brand" href="/home">
+            <img src="https://i.ibb.co/TbpT6p1/AAKIT-Logo.png" alt="" width="150" height="55">
+            <!-- <span><i class="fa-solid fa-user-tie"></i></span> -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
       
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul">
-            
-            <li class="nav-item">
-        <a class="nav-link" href="#" style="color:#2F3233">{{ user.first_name }}</a>
-            </li>
-            
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="profile-mini" src=https://contacts.zoho.in/file?t=user&ID=60018445719&fs=thumb width="30" height="30" style="border-radius: 15px;"></a>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">Manage my Account</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="{% url 'mylogout' %}">Logout</a></li>
-              </ul>
-            </li>
-            
-          </ul>
-      </div>
-      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 6%;">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ul">
+                <!-- notification -->
+                <li class="nav-item2 notification-icon-container" id="notification-icon-container">
+                  <button id="toggle-notification-btn" style="margin-top: 7%;border: none;background-color: #E9ECEF;"><i class="fa-solid fa-bell" id="notification-icon"></i></button>
+                  <span class="badge" id="notification-count">0</span> <!-- Initial count is 0 -->
+                </li>   
+                         
+                
+                <li class="nav-item2">
+                    <a class="nav-link" href="#" style="color:#2F3233">{{ user.first_name }}</a>
+                </li>
+                
+                <li class="nav-item2 dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="profile-mini" src="https://contacts.zoho.in/file?t=user&ID=60018445719&fs=thumb" width="30" height="30" style="border-radius: 15px;">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item manage-account" href="#">Manage my Account</a></li>
+                        <!-- <li><hr class="dropdown-divider"></li> -->
+                        <li><a class="dropdown-item logout" href="{% url 'mylogout' %}">Logout</a></li>
+                    </ul>
+                </li>
+                
+            </ul>
+        </div>
+
+
     </div>
   </nav>
+
+
+  
+
+<!-- Notification Card -->
+<div id="notification-card" class="notification-card hidden">
+  <div class="card-header">Notifications</div>
+  <div class="card-body">
+      <ul id="notification-list" class="list-group">
+      </ul>
+  </div>
+</div>
+
+<!-- Button to toggle notification -->
+<!-- <button id="toggle-notification-btn" style="margin-top: 7%;border: none;"><i class="fa-solid fa-bell" id="notification-icon"></i></button> -->
+
+<!-- <ul id="notification-list" class="list-group">
+  {% for notification in notifications %}
+    <li class="list-group-item" data-notification-id="{{ notification.id }}">
+      {{ notification.message }}
+    </li>
+  {% endfor %}
+</ul> -->
+
+
+<!-- HTML element A -->
+<!-- <button id="elementA" style="margin-top: 7%;">Click me to show element B</button> -->
+
+<!-- HTML element B (initially hidden) -->
+<!-- <div id="elementB" style="display: none;">
+    This is element B.
+</div> -->
+
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-2" style="background-color:#F7F7FB;border-right:solid white;">
@@ -123,25 +457,27 @@
               <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
                   <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li>
-                      <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color:#2F3233;font-weight: bolder;font-size:larger;margin-left:-4px;">
-                          <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">My View</span>
+                      <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="font-size:larger;margin-left:-4px;margin-top: 24px;color: black;">
+                          <i class="fs-4 bi-speedometer2"></i> <h6 style="margin-top: 4px;margin-left: 5px;"><b>My View</b></h6>
                       </a>
+                    
+                      
                   </li>
                   <li class="nav-item">
-                    <a href="/home" class="nav-link align-middle px-0 homelink" style="color:#2F3233;">
+                    <a href="/home" class="nav-link align-middle px-0" style="color:#2F3233;">
                       <i class="fa-solid fa-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                     </a>
-                </li> 
+                  </li> 
                   
-                      <li>
+                      <li class="nav-item">
                           <a href="/travel" class="nav-link px-0 align-middle" style="color:#2F3233">
                             <i class="fa-solid fa-suitcase"></i> <span class="ms-1 d-none d-sm-inline">Trips</span></a>
                       </li>
-                      <li>
+                      <li class="nav-item">
                         <a href="/view_trip" class="nav-link px-0 align-middle" style="color:#2F3233">
                           <i class="fa-solid fa-suitcase"></i> <span class="ms-1 d-none d-sm-inline">View Trips</span></a>
                     </li>
-                      <li>
+                      <li class="nav-item">
                           <a href="/expense" data-bs-toggle="collapse" class="nav-link px-0 align-middle " style="color:#2F3233">
                             <i class="fa-solid fa-receipt"></i> <span class="ms-1 d-none d-sm-inline">Expenses</span></a>
                           <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
@@ -154,54 +490,43 @@
                           </ul>
                       </li>
                       
-                      <li>
+                      <li class="nav-item">
                         <a href="/pettycash" class="nav-link px-0 align-middle" style="color:#2F3233">
                           <i class="fa-solid fa-sack-dollar"></i> <span class="ms-1 d-none d-sm-inline">Petty Cash</span></a>
                     </li>
                     
-                    <li>
+                    <li class="nav-item">
                       <a href="/advanceexp" class="nav-link px-0 align-middle" style="color:#2F3233">
                         <i class="fa-solid fa-wallet"></i> <span class="ms-1 d-none d-sm-inline">Advances</span> </a>
                   </li>
-                      <li>
+                      <li class="nav-item">
                         <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color:#2F3233">
                           <i class="fas fa-file"></i> <span class="ms-1 d-none d-sm-inline">Reports</span> </a>
                             <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <!-- <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                            </li> -->
+  
                         </ul>
                     </li>
                     <li>
-                      <li>
-                    <a href="#" class="nav-link px-0 align-middle" style="color:#2F3233">
-                      <i class="fa-solid fa-circle-check"></i> <span class="ms-1 d-none d-sm-inline">Approvals</span> </a>
-                </li>
-                <li>
+                <li class="nav-item">
                   <a href="#" class="nav-link px-0 align-middle" style="color:#2F3233">
                     <i class="fa-solid fa-chart-area"></i> <span class="ms-1 d-none d-sm-inline">Analytics</span> </a>
               </li>
-              <li>
+              <li class="nav-item">
                 <a href="#" class="nav-link px-0 align-middle" style="color:#2F3233">
                   <i class="fa-solid fa-gear"></i> <span class="ms-1 d-none d-sm-inline">My Settings</span> </a>
-            </li>
-                      <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color:#2F3233;font-weight: bolder;font-size: larger;margin-left:-4px;">
-                          <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Admin View</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/dashboard" class="nav-link px-0 align-middle" style="color:#2F3233">
-                        <i class="fa-solid fa-braille"></i>  <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                  </li>
+              </li>
+              {% if user.role_id == 1 or user.role_id == 3 %}
+              <li>
+                  <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle" style="color:black;font-weight: bolder;font-size: larger;margin-left:-4px;">
+                      <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Admin View</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                      <a href="/dashboard" class="nav-link px-0 align-middle" style="color:#2F3233;width: 115%;">
+                        <i class="fa-solid fa-braille"></i>  <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+                       </a>
+              </li>
+              {% endif %}          
                    
                                  
                   </ul>
@@ -214,221 +539,138 @@
       </div>
       </div>
       
-      <div class="col">
+      <div class="col" style=" margin-top:80px;">
   
-          <h5 style="margin-left: 1%;font-size: small; margin-top: 10%;"><b>Home</b></h5>
+          <!-- <h5><b>Home</b></h5> -->
   
-          <div class="container scroll" style="margin-top:1px;">
-  
-        
-  
-              <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-right:18%;">
-  
-                  <div class="container-md">
-  
-                    <a class="navbar-brand" href="#"><h6 style="font-size: small;"><b>Quick Add</b></h6></a>
-  
+      <div class="container" style="">
+
+              <nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: 104%;margin-left: -24px;"> 
+                  <div class="container"> 
+                    <a class="navbar-brand" href="#"><h6 style="margin-top: 15px;"><b>Quick Add</b></h6></a> 
                   </div>
-  
-                </nav>
-  
-        
-  
+              </nav>
+
           <br/>
-  
-          <div class="row">
-  
-              <div class="col-sm-3">
-  
-                <div class="card">
-  
+
+          <div class="container">
+            <div class="row">
+          
+              <div class="col-md-4 pt">
+                <div class="card mt-1 mb-1" style="border-color: F9CC48;">
+                  <div class="border-animation" style="border: 2px solid transparent; border-radius: 5px; animation: borderAnimation 5s linear infinite;"></div>
                   <div class="card-body">
-  
-                    <h6 style="margin-left: 27%;font-size: small;"> <b>Pending Task</b></h6>
-  
-                  <br/>
-  
-                    <h6 style="font-size: small;">Pending Approvals &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ..00</h6>
-  
-                    <hr/>
-  
-                    <h6 style="font-size: small;">Unreported Expenses &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  ..00</h6>
-  
-                    <h6 style="font-size: small;">Unreported Advances &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ..00</h6>
-  
-                  
-  
-        
-  
+                    <h6><b>Pending Task</b></h6>
+                    <br />
+                    <h6 style="font-size: small;">Pending Approvals ...00</h6>
+                    <hr />
+                    <h6 style="font-size: small;">Unreported Expenses ...00</h6>
+                    <h6 style="font-size: small;">Unreported Advances ...00</h6>
                   </div>
-  
                 </div>
-  
               </div>
-  
-              <div class="col-sm-3">
-  
-                <div class="card ">
-  
+
+              <div class="col-md-4 pt">
+                <div class="card mt-1 mb-1" style="height: 96%;border-color: F9CC48;">
+                  <div class="border-animation" style="border: 2px solid transparent; border-radius: 5px; animation: borderAnimation 5s linear infinite;"></div>
                   <div class="card-body">
-  
                     <i class="fa-solid fa-upload"></i>
-  
-                    <br/>
-  
-                    <br/>
-  
-                    <br/>
-  
-                    <br/>
-  
-                    <h6 style="margin-left: 30%; font-size: small;"><b> Create Expense</b></h6>
-  
-                    <a href="#" class="btn btn-dark" style="margin-left: 35%;">Create</a>
-  
+                    <br>
+                    <br>
+                    <br>
+                    <h6 style="margin-left: 26%;"><b>Create Expense</b></h6>
+                    <a href="#" class="btn" style="margin-left: 34%;background-color: F9CC48;">Create</a>
                   </div>
-  
                 </div>
-  
               </div>
-  
-              <div class="col-sm-3">
-  
-                  <div class="card">
-  
-                    <div class="card-body">
-  
-                      <i class="fa-solid fa-folder-plus"></i>
-  
-                      <br/>
-  
-                      <br/>
-  
-                      <br/>
-  
-                      <br/>
-  
-                      <h6 style="margin-left: 31%;font-size: small;"><b> Create Report</b></h6>
-  
-                      <a href="#" class="btn btn-dark" style="margin-left: 34%;">Create </a>
-  
-                    </div>
-  
+            
+              <div class="col-md-4 pt">
+                <div class="card mt-1 mr-3 mb-1" style="height: 96%;border-color: F9CC48;">
+                  <div class="border-animation" style="border: 2px solid transparent; border-radius: 5px; animation: borderAnimation 5s linear infinite;"></div>
+                  <div class="card-body">
+                    <i class="fa-solid fa-folder-plus"></i>
+                    <br />
+                    <br />
+                    <br />
+                    <h6 style="margin-left: 26%;"><b>Create Report</b></h6>
+                    <a href="#" class="btn" style="margin-left: 34%;background-color: F9CC48;">Create</a>
                   </div>
-  
                 </div>
-  
               </div>
-  
+          
+              <!-- <div class="col-md-4" style="">
+                <div class="card mt-1 mb-1" style="height: 96%;border-color: F9CC48;">
+                  <div class="card-body">
+                    <i class="fa-solid fa-upload"></i>
+                    <br>
+                    <br>
+                    <br>
+                    <h6 style="margin-left: 26%;"><b>Create Expense</b></h6>
+                    <a href="#" class="btn" style="margin-left: 34%;background-color: F9CC48;">Create</a>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="col-md-4" style="">
+                <div class="card mt-1 mr-3 mb-1" style="height: 96%;border-color: F9CC48;">
+                  <div class="card-body">
+                    <i class="fa-solid fa-folder-plus"></i>
+                    <br />
+                    <br />
+                    <br />
+                    <h6 style="margin-left: 26%;"><b>Create Report</b></h6>
+                    <a href="#" class="btn" style="margin-left: 34%;background-color: F9CC48;">Create</a>
+                  </div>
+                </div>
+              </div> -->
+          
+            </div>
+          </div>
+          
           
   
           <br/>
   
           
   
-            <div class="card text-center" style="margin-right: 20%;">
-  
-              <div class="card-header">
-  
-                <ul class="nav nav-pills card-header-pills">
-  
-                  <li class="nav-item">
-  
-                    <a class="nav-link " href="#" style="font-size: small;">Most Recent Reports</a>
-  
-                  </li>
-  
-                  <li class="nav-item">
-  
-                    <a class="nav-link" href="#" style="font-size: small;">Unsubmitted Reports</a>
-  
-                  </li>
-  
-                  <li class="nav-item">
-  
-                    <a class="nav-link" href="#" style="font-size: small;">Awaiting Approval Reports</a>
-  
-                  </li>
-  
-                  <li class="nav-item">
-  
-                    <a class="nav-link" href="#" style="font-size: small;">Awaiting Reimbursement Reports</a>
-  
-                  </li>
-  
-                </ul>
-  
-              </div>
-  
-              <div class="card-body">
-  
+          <div class="card" style="margin-right: 20%; width: 103%; margin-left: -19px; border: none; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
+            <div class="card-header">
+                <span class="nav nav-pills card-header-pills" style="font-size: small;">
+                    <span class="nav-item1" style="display: inline-block;">
+                        <a class="nav-link" href="#" style="color: black;">Most Recent Reports</a>
+                    </span>
+                    <span class="nav-item1" style="display: inline-block;">
+                        <a class="nav-link" href="#" style="color: black;">Unsubmitted Reports</a>
+                    </span>
+                    <span class="nav-item1" style="display: inline-block;">
+                        <a class="nav-link" href="#" style="color: black;">Awaiting Approval Reports</a>
+                    </span>
+                    <span class="nav-item1" style="display: inline-block;">
+                        <a class="nav-link" href="#" style="color: black;">Awaiting Reimbursement Reports</a>
+                    </span>
+                </span>
+            </div>
+        
+            <div class="card-body">
                 <br/>
-  
                 <br/>
-  
-                <br/>
-  
-                <br/>
-  
                 <p class="card-text" style="font-size: small;">No reports to display. Create a report using the button below.</p>
-  
-                <a href="#" class="btn btn-dark">Add New Report</a>
-  
+                <a href="#" class="btn add_rep" style="background-color: #F9CC48;">Add New Report</a>
                 <br/>
-  
-                <br/>
-  
-              </div>
-  
+                <br>
+                <br>
+                <br>
             </div>
+        </div>
+        
   
           <br/>
-  
-            <div class="card text-center" style="margin-right: 20%;">
-  
-              <div class="card-header">
-  
-                <ul class="nav nav-pills card-header-pills">
-  
-                  <li class="nav-item">
-  
-                    <a class="nav-link " href="#" style="font-size: small;">Recent Trip</a>
-  
-                  </li>
-  
-              
-  
-                </ul>
-  
-              </div>
-  
-              <div class="card-body">
-  
-                <br/>
-  
-                <br/>
-  
-                <br/>
-  
-                <br/>
-  
-                <p class="card-text" style="font-size: small;">Recently created trips will be listed here</p>
-  
-                <a href="#" class="btn btn-dark">Add New Trip</a>
-  
-                <br/>
-  
-                <br/>
-  
-              </div>
-  
-            </div>
       </div>
       
       </div>   
     </div>
   </div>
-  <footer class="text-center fixed-bottom" style="height:4%;padding:8px;background-color:#E9ECEF;color:black;border-top:solid white;">
+  <footer class="text-center fixed-bottom" style="height:4%;padding:8px;background-color:#E9ECEF;color:black;border-top:6px solid white;">
     <div class="text-center">
       <small>Copyright  2022 - All rights reserved</small>
       <a href=http://www.aakit.com target="_blank">AAKIT</a>

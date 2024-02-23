@@ -7,12 +7,38 @@ from django.dispatch import receiver
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
 from django.conf import settings
 from django.db.models import Max
+from datetime import datetime, timedelta
+from django.utils import timezone
+
 
 # from django.core.validators import RegexValidator
 
+class Basecostcenter(models.Model):
+    BCCINTRID = models.AutoField(primary_key=True,unique=True)
+    BCCDTLE = models.CharField(null=True,max_length=100,unique=True)
+    BCCDESP = models.CharField(null=True,max_length=100)
+    BCCEXPCSTCNTR = models.IntegerField(null=True)
+    BCCCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_userid',null=True, on_delete=models.SET_NULL)
+    BCCCREAON = models.DateTimeField(auto_now_add=True,null=True)
+    BCCMODIBY = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, on_delete=models.SET_NULL)
+    BCCMODION = models.DateTimeField(auto_now=True,null=True)
+    
+    class Meta:
+        db_table = "BCC"
+    def __str__(self) -> str:
+
+        return f'{self.BCCDESP}'
+
 class UserroleModel(models.Model):
     URINTRID = models.AutoField(primary_key=True,unique=True)
-    URROLTLE = models.CharField(null=True,max_length=100,unique=True)
+    URROLTLE = models.CharField(null=True,max_length=100,unique=True,error_messages ={
+                    "unique":"Role already exists."
+                    })
+    res_choices= (
+    ('Yes','Yes'),
+    ('No', 'No'),
+    )
+    URRESP = models.CharField(max_length=30,choices=res_choices,null=True)
     URROLDESP = models.CharField(null=True,max_length=100)
     URCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, on_delete=models.SET_NULL)
     URCREAON = models.DateTimeField(auto_now_add=True,null=True)
@@ -48,6 +74,11 @@ class WorkcenterModel(models.Model):
     WCWRKCNTR = models.CharField(null=True,max_length=100,unique=True,error_messages ={
                     "unique":"This Workcentre already exists."
                     })
+    status_choices= (
+    ('Active','Active'),
+    ('Inactive', 'Inactive'),
+    )
+    status = models.CharField(max_length=30,choices=status_choices,default='Active')
     WCWRKCNTRDESP = models.CharField(null=True,max_length=100)
     WCCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, on_delete=models.SET_NULL)
     WCCREAON = models.DateTimeField(auto_now_add=True,null=True)
@@ -60,6 +91,49 @@ class WorkcenterModel(models.Model):
     def __str__(self) -> str:
 
         return f'{self.WCWRKCNTR}'
+    
+class ProfileModel(models.Model):
+    TPFCINTID = models.AutoField(primary_key=True,unique=True)
+    TPFCLSEQ = models.IntegerField(null=True)
+    TPFCNAME = models.CharField(null=True,max_length=100)
+    TPFCMANID = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_pcre',null=True, on_delete=models.SET_NULL)
+    TPFCCREBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_pcby',null=True, on_delete=models.SET_NULL)
+    TPFCCREON = models.DateTimeField(auto_now_add=True,null=True)
+    TPFCMODBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_pmod',null=True, on_delete=models.SET_NULL)
+    TPFCMODON = models.DateTimeField(auto_now=True,null=True)
+    
+    class Meta:
+        db_table = "TPFC"
+
+    def __str__(self) -> str:
+
+        return f'{self.TPFCNAME}'
+    
+class AssignProfileModel(models.Model):
+    TPFAINTID = models.AutoField(primary_key=True,unique=True)
+    TPFAEMPID = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_asi',null=True, on_delete=models.SET_NULL)
+    TPFAPRNAME = models.ForeignKey(ProfileModel,null=True,related_name='%(class)s_pname', on_delete=models.SET_NULL)
+    TPFAFROMD = models.DateField(null=True) 
+    TPFATODATE = models.DateField(null=True) 
+    TPFACREDBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_asic',null=True, on_delete=models.SET_NULL)
+    TPFACREON = models.DateTimeField(auto_now_add=True,null=True)
+    TPFAMODBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_assim',null=True, on_delete=models.SET_NULL)
+    TPFAMODON = models.DateTimeField(auto_now=True,null=True)
+    status= (
+    ('Active','Active'),
+    ('Disable', 'Disable'),
+    )
+    TPFASTATUS = models.CharField(max_length=30,choices=status,default='Active')
+    
+    class Meta:
+        db_table = "TPFA"
+
+    def __str__(self) -> str:
+        return f'{self.TPFAPRNAME}'
+    
+    
+    
+
 
 class DepartmentModel(models.Model):
     DDINTRID = models.AutoField(primary_key=True,unique=True)
@@ -101,21 +175,68 @@ class MyUserManager(BaseUserManager):
 class MyUser(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(max_length=30,unique=True)
     user_name = models.CharField(max_length=150,unique=True)
+    emp_id = models.CharField(max_length=150,unique=True)
+    emp_type_choices = (
+    ('Permanant','Permanant'),
+    ('Contract','Contract'),  
+    ('Project Trainee','Project Trainee'),   
+
+    )
+    emp_type = models.CharField(max_length=30, choices=emp_type_choices,null=True)
     role = models.ForeignKey(UserroleModel,null=True, on_delete=models.SET_NULL)
+    cost_center = models.ForeignKey(Basecostcenter,null=True, on_delete=models.SET_NULL)
     grade = models.ForeignKey(GradeModel,null=True, on_delete=models.SET_NULL)
     department = models.ForeignKey(DepartmentModel,null=True, on_delete=models.SET_NULL)
     workcenter = models.ForeignKey(WorkcenterModel,null=True, on_delete=models.SET_NULL)
+    status_choices= (
+    ('Active','Active'),
+    ('Inactive', 'Inactive'),
+    )
+    emp_status = models.CharField(max_length=30,choices=status_choices,default='Active')
+    auth_choices = (
+    ('Unlocked','Unlocked'),
+    ('Locked', 'Locked'),
+    )
+    auth = models.CharField(max_length=30,choices=auth_choices,default='Unlocked')
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    mobileno = models.BigIntegerField(default=False)
+    mobileno = models.BigIntegerField(null=True)
     address = models.CharField(max_length=300)
-    dob = models.DateTimeField(null=True)
+    dob = models.DateField(null=True)
+    joining_date = models.DateField(null=True)
+    efforts = models.IntegerField(null=True)
+    profile = models.ForeignKey(AssignProfileModel,null=True,related_name='%(class)s_pname',on_delete=models.SET_NULL)
     objects = MyUserManager()
+    emp_created_by = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, on_delete=models.SET_NULL)
+    emp_created_on = models.DateField(null=True,max_length=100,auto_now_add=True)
+    emp_mod_by = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_user',null=True, on_delete=models.SET_NULL)
+    emp_mod_on = models.DateField(null=True,max_length=100,auto_now=True)
+    password_status = models.CharField(max_length=10,default='N')
+    pass_date_changed = models.DateField(null=True)
     USERNAME_FIELD  = 'user_name'
     REQUIRED_FIELDS = ['first_name','email']
 
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
+    
+    # def set_password(self, *args, **kwargs):
+    #     # Update the password_change_date field when the password is changed
+    #     self.pass_date_changed = datetime.now().date()
+    #     super().set_password(*args, **kwargs)
+    #     self.save()
+    
+    def save(self, *args, **kwargs):
+        if self.pk:
+            # Check if the password field has been modified
+            orig = MyUser.objects.get(pk=self.pk)
+            if orig.password != self.password:
+                self.pass_date_changed = timezone.now().date()
+                self.password_status = 'Y'
+
+        super().save(*args, **kwargs)
+
+    # def __str__(self):
+    #     return self.password_status
 
 
 
@@ -174,26 +295,6 @@ class Expensesubheadmaster(models.Model):
 #     def __str__(self) -> str:
 
 #         return f'{self.EXSTLE}'
-
-
-class Basecostcenter(models.Model):
-    BCCINTRID = models.AutoField(primary_key=True,unique=True)
-    BCCDTLE = models.CharField(null=True,max_length=100,unique=True)
-    BCCDESP = models.CharField(null=True,max_length=100)
-    BCCEXPCSTCNTR = models.IntegerField(null=True)
-    BCCCREABY = models.CharField(max_length=100,null=True)
-    BCCCREAON = models.DateTimeField(auto_now_add=True,null=True)
-    BCCMODIBY = models.CharField(null=True,max_length=100)
-    BCCMODION = models.DateTimeField(auto_now=True,null=True)
-    
-    class Meta:
-        db_table = "BCC"
-    def __str__(self) -> str:
-
-        return f'{self.BCCTLE}'
-
-
-
 
 
 
@@ -318,8 +419,6 @@ def ids():
 class DivmasterModel(models.Model):
     DIVINTID = models.IntegerField(('Code'), default=ids, unique=True, editable=False)
     DIVMID = models.CharField(primary_key=True, editable=False, max_length=30)
-    # DIVMID= models.AutoField(primary_key=True, editable=False)
-    # DIVMID= models.CharField(primary_key=True, editable=False, max_length=10)
     DIVMTLE = models.CharField(null=True,max_length=100,unique=True)
     DIVMDESP = models.CharField(null=True,max_length=100)
     DIVMCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, on_delete=models.SET_NULL)
@@ -337,8 +436,8 @@ class DivmasterModel(models.Model):
     class Meta:
         db_table = "DIVM"
     def __str__(self) -> str:
-
-        return f'{self.DIVMTLE}'
+        return f'{self.DIVMID} - {self.DIVMTLE}'
+        # return f'{self.DIVMTLE}'
 
 def tids():
     no = TitledetailsModel.objects.count()
@@ -369,7 +468,7 @@ class TitledetailsModel(models.Model):
         db_table = "TITD"
     def __str__(self) -> str:
 
-        return f'{self.TITDTLE}'
+        return f'{self.TITDTLTLE}'
 
 
 
@@ -381,6 +480,41 @@ class TitledetailsModel(models.Model):
 # @receiver(post_save, sender=User)
 # def save_profile(sender, instance, **kwargs):
 #     instance.form.save()
+
+class TravelStatus(models.Model):
+    TSID = models.AutoField(primary_key=True, unique=True)
+    TSCODE = models.CharField(null=True,max_length=100)
+    TSDESC = models.CharField(null=True,max_length=100)
+    TSCREBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_created',null=True, on_delete=models.SET_NULL)
+    TSCREON = models.DateField(null=True,max_length=100,auto_now_add=True)
+    TSMODBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_modified',null=True, on_delete=models.SET_NULL)
+    TSMODON = models.DateField(null=True,max_length=100,auto_now=True)
+
+    class Meta:
+        db_table = "TS"
+
+    def __str__(self) -> str:
+        return f'{self.TSDESC}'
+    
+class BookingStatus(models.Model):
+    status = models.CharField(max_length=50)
+    status_createdby = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_screated',null=True, on_delete=models.SET_NULL)
+    status_createdon = models.DateField(null=True,max_length=100,auto_now_add=True)
+    status_modiby = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_smodified',null=True, on_delete=models.SET_NULL)
+    status_modon = models.DateField(null=True,max_length=100,auto_now=True)
+
+    def __str__(self):
+        return self.status
+    
+class ProgressStatus(models.Model):
+    status = models.CharField(max_length=100)
+    pstatus_createdby = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_pcreated',null=True, on_delete=models.SET_NULL)
+    pstatus_createdon = models.DateField(null=True,max_length=100,auto_now_add=True)
+    pstatus_modiby = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_pmodified',null=True, on_delete=models.SET_NULL)
+    pstatus_modon = models.DateField(null=True,max_length=100,auto_now=True)
+
+    def __str__(self):
+        return self.status
 
 
 class Travelrequestheader(models.Model):
@@ -401,18 +535,54 @@ class Travelrequestheader(models.Model):
     ('Completed','Completed'),
     )
     THSTUSTYP = models.CharField(max_length=30,choices=status_choices,default='Applied',null=True)
+    THLEVELC = models.IntegerField(null=True,default=0)
+    THBOOKSTA = models.ForeignKey(BookingStatus, on_delete=models.SET_NULL, null=True)
+    THTASTATUS = models.ForeignKey(TravelStatus, on_delete=models.SET_NULL, null=True)
     THPROJ = models.ForeignKey(Projectmaster,null=True, on_delete=models.SET_NULL)
     THRCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_created',null=True, on_delete=models.SET_NULL)
     THRCREAON = models.DateField(null=True,max_length=100,auto_now_add=True)
     THRMODIBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_modified',null=True, on_delete=models.SET_NULL)
     THRMODION = models.DateField(null=True,max_length=100,auto_now=True)
+    THAPPROVEDBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_approved_by',null=True, on_delete=models.SET_NULL)
+
     
     class Meta:
         db_table = "THR"
 
     def __str__(self) -> str:
-
         return f'{self.THTRPNAME}'
+
+    
+
+class Notification(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, on_delete=models.SET_NULL)
+    message = models.CharField(max_length=255)
+    travel_request = models.ForeignKey(Travelrequestheader, on_delete=models.CASCADE)
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.pk:
+            # If the notification is being updated, set the updated_at field
+            self.updated_at = timezone.now()
+        super().save(*args, **kwargs)
+    
+class ApproverStatus(models.Model):
+    ACTION_CHOICES = [
+        ('approve', 'Approve'),
+        ('reject', 'Reject'),
+    ]
+
+    THAINTID = models.AutoField(primary_key=True, unique=True)
+    travel_request = models.ForeignKey(Travelrequestheader, on_delete=models.CASCADE)
+    approver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    action = models.CharField(max_length=10, choices=ACTION_CHOICES)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "TAS"
+
 
 
 
@@ -431,6 +601,8 @@ class Travelflightdetails(models.Model):
     TFLDDTEOFTRV = models.DateField(null=True)    
     TFLDFRMPLC = models.CharField(max_length=100,null=True)    
     TFLDTOPLC = models.CharField(max_length=100)  
+    TFLDPROGSTA = models.ForeignKey(ProgressStatus, on_delete=models.SET_NULL, null=True)
+    TFLDREM = models.CharField(max_length=200,null=True)
     TFLDRETURN = models.DateField(null=True)
     TFLDCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tcreated',null=True, on_delete=models.SET_NULL)
     TFLDCREAON = models.DateField(null=True,max_length=100,auto_now_add=True)
@@ -445,6 +617,7 @@ class MulticityDetails(models.Model):
     MULFLTID = models.ForeignKey(Travelrequestheader,null=True, blank=True,on_delete=models.CASCADE)
     MULFLTFP = models.CharField(max_length=100)
     MULFLTTP = models.CharField(max_length=100)
+    MULFLPRST = models.ForeignKey(ProgressStatus, on_delete=models.SET_NULL, null=True)
     MULFLTDT = models.DateField(null=True)
     MULFTCRB = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_mtcreated',null=True, on_delete=models.SET_NULL)
     MULFTCRO = models.DateField(null=True,max_length=100,auto_now_add=True)
@@ -468,6 +641,7 @@ class Travelvisadetails(models.Model):
     TVDVISTGCOUN = models.CharField(null=True,max_length=100)
     TVDVSAFES = models.CharField(null=True,max_length=100)
     TVDREMK = models.CharField(null=True,max_length=100)
+    TVDPROGSTA = models.ForeignKey(ProgressStatus, on_delete=models.SET_NULL, null=True)
     TVDCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tdvcreated',null=True, on_delete=models.SET_NULL)
     TVDCREAON = models.DateField(null=True,max_length=100,auto_now_add=True)
     TVDMODIBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tdmodified',null=True, on_delete=models.SET_NULL)
@@ -493,6 +667,7 @@ class Travelforexdetails(models.Model):
     )
     TFDCSHTYPE = models.CharField(max_length=30, choices=csh_type,null=True)
     TFDREMARK = models.CharField(null=True,max_length=100)
+    TFDPROGSTA = models.ForeignKey(ProgressStatus, on_delete=models.SET_NULL, null=True)
     TFODCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tfdcreated',null=True, on_delete=models.SET_NULL)
     TFODCREAON = models.DateField(null=True,max_length=100,auto_now_add=True)
     TFODMODIBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tfdmodified',null=True, on_delete=models.SET_NULL)
@@ -501,92 +676,6 @@ class Travelforexdetails(models.Model):
     class Meta:
         db_table = "TFD"
 
-
-class TravelDetails(models.Model):
-    TDINTID = models.AutoField(primary_key=True, unique=True)
-    TDTRPNME = models.CharField(max_length=100,null=True)
-    TDPROJ = models.ForeignKey(Projectmaster,null=True, on_delete=models.SET_NULL)
-    TDBPURPSE = models.CharField(max_length=100,null=True)
-    type_choices = (
-    ('Domestic','Domestic travel'),
-    ('International', 'International travel'),
-    )
-    TDTRVTYPE = models.CharField(max_length=30, choices=type_choices,null=True)
-    trip_choices= (
-    ('One Way','One Way'),
-    ('Round Trip', 'Round Trip'),
-    ('Multi-city','Multi-city'),
-    )
-    TDFLTYPE = models.CharField(max_length=30,choices=trip_choices,default='One Way',blank=True)
-    TDFLTPREF = models.CharField(max_length=100,null=True)
-    TDFLTPREFAIR = models.CharField(max_length=100,null=True)
-    TDDPART1 = models.CharField(max_length=100,null=True)
-    TDARVAT1 = models.CharField(max_length=100,null=True)
-    TDDPARTDTE1 = models.DateField(null=True)
-    TDRETDTE = models.DateField(null=True)
-    TDDPART2 = models.CharField(max_length=100,null=True)
-    TDARVAT2 = models.CharField(max_length=100,null=True)
-    TDDPARTDTE2 = models.DateField(null=True)
-    TDDPART3 = models.CharField(max_length=100,null=True)
-    TDARVAT3 = models.CharField(max_length=100,null=True)
-    TDDPARTDTE3 = models.DateField(null=True)
-    room_type = (
-    ('Standard Room:','Standard Room'),
-    ('Deluxe Room', 'Deluxe Room'),
-    ('Suite','Suite'),
-    ('Villa','Villa'),
-    ('Penthouse','Penthouse'),
-    )
-    TDHROOMTYP = models.CharField(max_length=30, choices=room_type,blank=True)
-    TDHCHINDTE1 = models.DateField(null=True)
-    TDHCHOUTDTE1 = models.DateField(null=True)
-    TDHTLCTY1 = models.CharField(max_length=100,null=True)
-    TDHTLSEC1 = models.CharField(max_length=100,null=True)
-    TDHTRVDTE1 = models.DateField(null=True)
-    TDHPREFHTL1 = models.CharField(max_length=100,null=True)
-    TDHCHINDTE2 = models.DateField(null=True)
-    TDHCHOUTDTE2 = models.DateField(null=True)
-    TDHTLCTY2 = models.CharField(max_length=100,null=True)
-    TDHTLSEC2 = models.CharField(max_length=100,null=True)
-    TDHTRVDTE2 = models.DateField(null=True)
-    TDHPREFHTL2 = models.CharField(max_length=100,null=True)
-    TDHCHINDTE3 = models.DateField(null=True)
-    TDHCHOUTDTE3 = models.DateField(null=True)
-    TDHTLCTY3 = models.CharField(max_length=100,null=True)
-    TDHTLSEC3 = models.CharField(max_length=100,null=True)
-    TDHTRVDTE3 = models.DateField(null=True)
-    TDHPREFHTL3 = models.CharField(max_length=100,null=True)
-    car_type = (
-    ('Micro:','Micro'),
-    ('Sedan', 'Sedan'),
-    ('SUV','SUV'),
-    )
-    TDCARTYP = models.CharField(max_length=30, choices=car_type,blank=True)
-    TDCFRMLOC1 = models.CharField(max_length=100,null=True)
-    TDCTOLOC1 = models.CharField(max_length=100,null=True)
-    TDCPIKUPDTE1 = models.DateField(null=True)
-    TDCDRPDTE1 = models.DateField(null=True)
-    TDCTRVDTE1 = models.DateField(null=True)
-    TDCREMRK1 = models.CharField(max_length=100,null=True)
-    TDCFRMLOC2 = models.CharField(max_length=100,null=True)
-    TDCTOLOC2 = models.CharField(max_length=100,null=True)
-    TDCPIKUPDTE2 = models.DateField(null=True)
-    TDCDRPDTE2 = models.DateField(null=True)
-    TDCTRVDTE2 = models.DateField(null=True)
-    TDCREMRK2 = models.CharField(max_length=100,null=True)
-    TDCFRMLOC3 = models.CharField(max_length=100,null=True)
-    TDCTOLOC3 = models.CharField(max_length=100,null=True)
-    TDCPIKUPDTE3 = models.DateField(null=True)
-    TDCDRPDTE3 = models.DateField(null=True)
-    TDCTRVDTE3 = models.DateField(null=True)
-    TDCREMRK3 = models.CharField(max_length=100,null=True)
-    TDCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tdcreated',null=True, on_delete=models.SET_NULL)
-    TDMODIBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tdmodified',null=True, on_delete=models.SET_NULL)
-    TDCREAON = models.DateField(null=True,max_length=100,auto_now_add=True)
-    TDMODION = models.DateField(null=True,max_length=100,auto_now=True)
-
-    class Meta:
-        db_table = "TD"
 
 
 
@@ -608,7 +697,7 @@ class Travelhoteldetails(models.Model):
     ('Villa','Villa'),
     )  
     THDHTYPE = models.CharField(max_length=30, choices=hotel_choices,blank=True)
-    # THDSNGLDOBL = models.CharField(null=True,max_length=100)
+    THDPROGSTA = models.ForeignKey(ProgressStatus, on_delete=models.SET_NULL, null=True)
     THDCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tcreated',null=True, on_delete=models.SET_NULL)
     THDCREAON = models.DateField(null=True,max_length=100,auto_now_add=True)
     THDMODIBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tmodified',null=True, on_delete=models.SET_NULL)
@@ -648,6 +737,8 @@ class Travelcarbookingdetails(models.Model):
     TCBDCTYP = models.CharField(max_length=30, choices=type_choices,blank=True)
     TCBDFRLOC = models.CharField(null=True,max_length=100)
     TCBDTOLOC = models.CharField(null=True,max_length=100)
+    TCBDPROGSTA = models.ForeignKey(ProgressStatus, on_delete=models.SET_NULL, null=True)
+    TCBDREM = models.CharField(max_length=200,null=True) 
     TCBDPIKU = models.DateField(null=True)
     TCBDDROP = models.DateField(null=True)
     TCBDCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tcreated',null=True, on_delete=models.SET_NULL)
@@ -836,10 +927,18 @@ class Tileautherizationdetails(models.Model):
     TADURROLTLE = models.ForeignKey(UserroleModel, null=True, on_delete=models.SET_NULL)
     TADDIVMINTRID = models.ForeignKey(DivmasterModel, null=True, on_delete=models.SET_NULL)
     TADSEQ = models.IntegerField(null=True)
-    TADCREABY = models.CharField(max_length=100,null=True)
+    TADCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, on_delete=models.SET_NULL)
     TADCREAON = models.DateTimeField(auto_now_add=True,null=True)
-    TADMODIBY = models.CharField(null=True,max_length=100)
+    TADMODIBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_tile_auth',null=True, on_delete=models.SET_NULL)
     TADMODION = models.DateTimeField(auto_now=True,null=True)
+
+    def save(self, *args, **kwargs):
+        if self.TADSEQ is None:
+            # Get the maximum TADSEQ value and increment it by 1
+            max_seq = Tileautherizationdetails.objects.aggregate(models.Max('TADSEQ'))['TADSEQ__max']
+            self.TADSEQ = (max_seq or 0) + 1
+
+        super().save(*args, **kwargs)
     
 
     class Meta:
@@ -851,12 +950,19 @@ class Divassignmentuser(models.Model):
     DIVASSUINTRID = models.AutoField(primary_key=True, unique=True)
     DIVASSUURROLTLE = models.ForeignKey(UserroleModel, null=True, on_delete=models.SET_NULL)
     DIVASSUDIVMID = models.ForeignKey(DivmasterModel, null=True, on_delete=models.SET_NULL)
-    DIVASSUSEQ = models.ForeignKey(Tileautherizationdetails, null=True, on_delete=models.SET_NULL)
-    DIVASSUCREABY = models.CharField(max_length=100,null=True)
+    DIVASSUSEQ = models.IntegerField(null=True)
+    DIVASSUCREABY = models.ForeignKey(settings.AUTH_USER_MODEL,null=True, on_delete=models.SET_NULL)
     DIVASSUCREAON = models.DateTimeField(auto_now_add=True,null=True)
-    DIVASSUMODIBY = models.CharField(null=True,max_length=100)
+    DIVASSUMODIBY = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='%(class)s_div_ass',null=True, on_delete=models.SET_NULL)
     DIVASSUMODION = models.DateTimeField(auto_now=True,null=True)
     
+    def save(self, *args, **kwargs):
+        if self.DIVASSUSEQ is None:
+            # Get the maximum TADSEQ value and increment it by 1
+            max_seq = Divassignmentuser.objects.aggregate(models.Max('DIVASSUSEQ'))['DIVASSUSEQ__max']
+            self.DIVASSUSEQ = (max_seq or 0) + 1
+
+        super().save(*args, **kwargs)
 
     class Meta:
             db_table = "DIVASSU"

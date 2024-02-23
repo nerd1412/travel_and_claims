@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Aakit Technologies</title>
+</head>
+<body>
+    <h2>Welcome to Aakit Technologies!</h2>
+    <p>Dear {{ user.first_name }},</p>
+    <p>Your account has been created. Here are your account details:</p>
+    <p><strong>Username:</strong> {{ user_name }}</p>
+    <p><strong>Temporary Password:</strong> {{ password }}</p>
+    <p>Please click the link below to reset your password and log in:</p>
+    <p><a href="{{ reset_url }}">Reset Password and Log In</a></p>
+    <p>If you have any questions, feel free to contact our support team.</p>
+    <p>Best regards,<br>Your Company Team</p>
+</body>
+</html>
